@@ -3,40 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import Chart from 'chart.js/auto';
-
-const getBackgroundColor = (label: string) => {
-  const colors = {
-    'Calls': 'rgba(31, 41, 55, 0.8)',
-    'Forms': 'rgba(55, 65, 81, 0.8)',
-    'Emails': 'rgba(167, 243, 208, 0.8)',
-    'Other': 'rgba(216, 180, 254, 0.8)'
-  };
-  return colors[label] || 'rgba(107, 114, 128, 0.8)';
-};
-
-const getBorderColor = (label: string) => {
-  const colors = {
-    'Calls': 'rgba(31, 41, 55, 1)',
-    'Forms': 'rgba(55, 65, 81, 1)',
-    'Emails': 'rgba(167, 243, 208, 1)',
-    'Other': 'rgba(216, 180, 254, 1)'
-  };
-  return colors[label] || 'rgba(107, 114, 128, 1)';
-};
-
-const createChartData = (totalLeads: number) => {
-  const data = [
-    { label: 'Calls', value: 101 },
-    { label: 'Forms', value: 59 },
-    { label: 'Emails', value: 21 },
-    { label: 'Other', value: 11 },
-  ];
-
-  return data.map(item => ({
-    ...item,
-    percentage: (item.value / totalLeads) * 100
-  }));
-};
+import { createChartData, getBackgroundColor, getBorderColor } from '../utils/chartUtils';
 
 const LeadsChart = () => {
   const chartRef = useRef<HTMLCanvasElement>(null);
@@ -75,21 +42,17 @@ const LeadsChart = () => {
                 beginAtZero: true,
                 max: 100,
                 display: false,
-                grid: {
-                  display: false
-                }
+                grid: { display: false }
               },
               y: {
                 stacked: true,
                 display: false,
-                grid: {
-                  display: false
-                }
+                grid: { display: false }
               }
             },
             plugins: {
               legend: {
-                display: false // Hide the original legend
+                display: false
               },
               tooltip: {
                 callbacks: {
@@ -127,13 +90,17 @@ const LeadsChart = () => {
                   index: index
                 }));
 
+                ul.style.display = 'flex';
+                ul.style.justifyContent = 'space-around';
+                ul.style.flexWrap = 'wrap';
+
                 items.forEach(item => {
                   const li = document.createElement('li');
                   li.style.alignItems = 'center';
                   li.style.cursor = 'pointer';
                   li.style.display = 'flex';
                   li.style.flexDirection = 'row';
-                  li.style.marginLeft = '10px';
+                  li.style.marginRight = '10px';
 
                   li.onclick = () => {
                     chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
