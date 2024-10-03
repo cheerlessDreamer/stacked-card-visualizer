@@ -54,6 +54,7 @@ const LeadsChart = () => {
           options: {
             indexAxis: 'y',
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
               x: {
                 stacked: true,
@@ -101,7 +102,7 @@ const LeadsChart = () => {
       </CardHeader>
       <CardContent>
         <div className="text-5xl font-bold mb-4">192</div>
-        <div className="w-full h-48">
+        <div className="w-full h-64">
           <canvas ref={chartRef}></canvas>
         </div>
         <Button className="w-full mt-4 bg-green-400 hover:bg-green-500 text-white">Add WhatsApp</Button>
