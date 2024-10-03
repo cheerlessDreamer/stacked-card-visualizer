@@ -29,20 +29,6 @@ const LeadsChart = () => {
           percentage: (item.value / totalLeads) * 100
         }));
 
-        const legendMarker = (color: string) => {
-          const canvas = document.createElement('canvas');
-          canvas.width = 14;
-          canvas.height = 14;
-          const ctx = canvas.getContext('2d');
-          if (ctx) {
-            ctx.fillStyle = color;
-            ctx.beginPath();
-            ctx.arc(7, 7, 5, 0, 2 * Math.PI);
-            ctx.fill();
-          }
-          return canvas;
-        };
-
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -87,7 +73,7 @@ const LeadsChart = () => {
                   generateLabels: (chart) => {
                     const datasets = chart.data.datasets;
                     return datasets.map((dataset, i) => ({
-                      text: `${dataset.label}\n<span style="font-weight: bold;">${data[i].value}</span>`,
+                      text: `${dataset.label}<br><strong>${data[i].value}</strong>`,
                       fillStyle: dataset.backgroundColor as string,
                       strokeStyle: dataset.borderColor as string,
                       lineWidth: 1,
