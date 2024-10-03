@@ -23,17 +23,17 @@ const LeadsChart = () => {
           type: 'bar',
           data: {
             labels: [''],
-            datasets: percentages.map(item => ({
+            datasets: percentages.map((item, index) => ({
               label: item.label,
               data: [item.percentage],
               backgroundColor: getBackgroundColor(item.label),
               borderColor: getBorderColor(item.label),
               borderWidth: 1,
               borderRadius: {
-                topLeft: 8,
-                topRight: 8,
-                bottomLeft: 8,
-                bottomRight: 8
+                topLeft: index === 0 ? 8 : 0,
+                topRight: index === percentages.length - 1 ? 8 : 0,
+                bottomLeft: index === 0 ? 8 : 0,
+                bottomRight: index === percentages.length - 1 ? 8 : 0
               },
               borderSkipped: false
             }))
