@@ -153,7 +153,7 @@ const LeadsChart = () => {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-2xl font-bold">All channels</CardTitle>
+        <CardTitle className="text-2xl font-normal">All channels</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
             <SelectTrigger className="w-[180px]">
@@ -170,7 +170,7 @@ const LeadsChart = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-5xl font-bold mb-4">192</div>
+        <div className="text-5xl font-normal mb-4">192</div>
         <div className="w-full h-64 relative">
           <canvas ref={chartRef}></canvas>
           <ul className="mt-4 list-none p-0"></ul>
