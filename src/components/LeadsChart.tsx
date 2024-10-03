@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Chart from 'chart.js/auto';
-import { createChartData, getBackgroundColor, getBorderColor } from '../utils/chartUtils';
+import { createChartData, getBackgroundColor, getBorderColor, getLighterColor } from '../utils/chartUtils';
 
 const LeadsChart = () => {
   const chartRef = useRef<HTMLCanvasElement>(null);
@@ -27,8 +27,9 @@ const LeadsChart = () => {
               label: item.label,
               data: [item.percentage],
               backgroundColor: getBackgroundColor(item.label),
+              hoverBackgroundColor: getLighterColor(getBackgroundColor(item.label), 15),
               borderColor: getBorderColor(item.label),
-              borderWidth: 0, // Set borderWidth to 0 to remove gaps
+              borderWidth: 0,
               borderRadius: {
                 topLeft: index === 0 ? 8 : 0,
                 topRight: index === percentages.length - 1 ? 8 : 0,
