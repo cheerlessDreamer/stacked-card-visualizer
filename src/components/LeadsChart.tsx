@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import Chart from 'chart.js/auto';
 import { createChartData, getBackgroundColor, getBorderColor } from '../utils/chartUtils';
 
@@ -175,7 +174,6 @@ const LeadsChart = () => {
           <canvas ref={chartRef}></canvas>
           <ul className="mt-4 list-none p-0"></ul>
         </div>
-        <Button className="w-full mt-4 bg-green-400 hover:bg-green-500 text-white">Add WhatsApp</Button>
       </CardContent>
     </Card>
   );
