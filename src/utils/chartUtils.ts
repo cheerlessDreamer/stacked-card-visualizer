@@ -1,29 +1,32 @@
 export const getBackgroundColor = (label: string) => {
   const colors = {
-    'Calls': 'rgba(31, 41, 55, 0.8)',
-    'Forms': 'rgba(55, 65, 81, 0.8)',
-    'Emails': 'rgba(167, 243, 208, 0.8)',
-    'Other': 'rgba(216, 180, 254, 0.8)'
+    'Calls': '#1F4447',
+    'Forms': '#2F5D63',
+    'Emails': '#97EA98',
+    'Chats': '#B8FFBA',
+    'Other': '#E7B6F6'
   };
-  return colors[label] || 'rgba(107, 114, 128, 0.8)';
+  return colors[label] || '#2F5D63';
 };
 
 export const getBorderColor = (label: string) => {
   const colors = {
-    'Calls': 'rgba(31, 41, 55, 1)',
-    'Forms': 'rgba(55, 65, 81, 1)',
-    'Emails': 'rgba(167, 243, 208, 1)',
-    'Other': 'rgba(216, 180, 254, 1)'
+    'Calls': '#1F4447',
+    'Forms': '#2F5D63',
+    'Emails': '#97EA98',
+    'Chats': '#B8FFBA',
+    'Other': '#E7B6F6'
   };
-  return colors[label] || 'rgba(107, 114, 128, 1)';
+  return colors[label] || '#2F5D63';
 };
 
 export const createChartData = (totalLeads: number) => {
   const data = [
-    { label: 'Calls', value: 101 },
-    { label: 'Forms', value: 59 },
-    { label: 'Emails', value: 21 },
-    { label: 'Other', value: 11 },
+    { label: 'Calls', value: 80 },
+    { label: 'Forms', value: 50 },
+    { label: 'Emails', value: 30 },
+    { label: 'Chats', value: 20 },
+    { label: 'Other', value: 12 },
   ];
 
   return data.map(item => ({
