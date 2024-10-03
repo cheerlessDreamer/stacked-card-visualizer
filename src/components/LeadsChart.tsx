@@ -19,7 +19,7 @@ const LeadsChart = () => {
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Total'],
+            labels: ['Leads'],
             datasets: [
               {
                 label: 'Calls',
@@ -84,7 +84,7 @@ const LeadsChart = () => {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-2xl font-bold">All channels</CardTitle>
+        <CardTitle className="text-2xl font-bold">All leads</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
             <SelectTrigger className="w-[180px]">
