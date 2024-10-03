@@ -66,7 +66,7 @@ const LeadsChart = () => {
             plugins: {
               legend: {
                 position: 'bottom',
-                align: 'start' // This aligns the legend to the left
+                align: 'start'
               },
               tooltip: {
                 callbacks: {
@@ -76,7 +76,7 @@ const LeadsChart = () => {
                       label += ': ';
                     }
                     if (context.parsed.x !== null) {
-                      label += context.parsed.x.toFixed(1) + '% (' + data.find(item => item.label === context.dataset.label)?.value + ')';
+                      label += data.find(item => item.label === context.dataset.label)?.value;
                     }
                     return label;
                   }
