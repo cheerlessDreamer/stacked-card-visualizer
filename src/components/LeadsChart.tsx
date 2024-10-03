@@ -28,7 +28,7 @@ const LeadsChart = () => {
               data: [item.percentage],
               backgroundColor: getBackgroundColor(item.label),
               borderColor: getBorderColor(item.label),
-              borderWidth: 1,
+              borderWidth: 0, // Set borderWidth to 0 to remove gaps
               borderRadius: {
                 topLeft: index === 0 ? 8 : 0,
                 topRight: index === percentages.length - 1 ? 8 : 0,
@@ -170,6 +170,7 @@ const LeadsChart = () => {
               <SelectItem value="calls">Calls</SelectItem>
               <SelectItem value="forms">Forms</SelectItem>
               <SelectItem value="emails">Emails</SelectItem>
+              <SelectItem value="chats">Chats</SelectItem>
               <SelectItem value="other">Other</SelectItem>
             </SelectContent>
           </Select>
