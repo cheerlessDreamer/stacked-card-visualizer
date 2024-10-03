@@ -28,7 +28,8 @@ const LeadsChart = () => {
               data: [item.percentage],
               backgroundColor: getBackgroundColor(item.label),
               borderColor: getBorderColor(item.label),
-              borderWidth: 1
+              borderWidth: 1,
+              borderRadius: 8 // Add this line to round the corners
             }))
           },
           options: {
