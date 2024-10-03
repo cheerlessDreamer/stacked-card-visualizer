@@ -27,7 +27,7 @@ const LeadsChart = () => {
               label: item.label,
               data: [item.percentage],
               backgroundColor: getBackgroundColor(item.label),
-              hoverBackgroundColor: getLighterColor(getBackgroundColor(item.label), 15),
+              hoverBackgroundColor: getLighterColor(getBackgroundColor(item.label) || '#2F5D63', 15),
               borderColor: getBorderColor(item.label),
               borderWidth: 0,
               borderRadius: {
