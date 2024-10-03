@@ -16,40 +16,30 @@ const LeadsChart = () => {
           chartInstance.current.destroy();
         }
 
+        const totalLeads = 192;
+        const data = [
+          { label: 'Calls', value: 101 },
+          { label: 'Forms', value: 59 },
+          { label: 'Emails', value: 21 },
+          { label: 'Other', value: 11 },
+        ];
+
+        const percentages = data.map(item => ({
+          ...item,
+          percentage: (item.value / totalLeads) * 100
+        }));
+
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: [''],  // Empty label to remove 'Leads'
-            datasets: [
-              {
-                label: 'Calls',
-                data: [101],
-                backgroundColor: 'rgba(31, 41, 55, 0.8)',
-                borderColor: 'rgba(31, 41, 55, 1)',
-                borderWidth: 1
-              },
-              {
-                label: 'Forms',
-                data: [59],
-                backgroundColor: 'rgba(55, 65, 81, 0.8)',
-                borderColor: 'rgba(55, 65, 81, 1)',
-                borderWidth: 1
-              },
-              {
-                label: 'Emails',
-                data: [21],
-                backgroundColor: 'rgba(167, 243, 208, 0.8)',
-                borderColor: 'rgba(167, 243, 208, 1)',
-                borderWidth: 1
-              },
-              {
-                label: 'Other',
-                data: [11],
-                backgroundColor: 'rgba(216, 180, 254, 0.8)',
-                borderColor: 'rgba(216, 180, 254, 1)',
-                borderWidth: 1
-              }
-            ]
+            labels: [''],
+            datasets: percentages.map(item => ({
+              label: item.label,
+              data: [item.percentage],
+              backgroundColor: getBackgroundColor(item.label),
+              borderColor: getBorderColor(item.label),
+              borderWidth: 1
+            }))
           },
           options: {
             indexAxis: 'y',
@@ -58,16 +48,36 @@ const LeadsChart = () => {
             scales: {
               x: {
                 stacked: true,
-                beginAtZero: true
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  callback: function(value) {
+                    return value + '%';
+                  }
+                }
               },
               y: {
                 stacked: true,
-                display: false  // Hide y-axis labels
+                display: false
               }
             },
             plugins: {
               legend: {
                 position: 'bottom'
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    let label = context.dataset.label || '';
+                    if (label) {
+                      label += ': ';
+                    }
+                    if (context.parsed.x !== null) {
+                      label += context.parsed.x.toFixed(1) + '% (' + data.find(item => item.label === context.dataset.label)?.value + ')';
+                    }
+                    return label;
+                  }
+                }
               }
             }
           }
@@ -82,10 +92,30 @@ const LeadsChart = () => {
     };
   }, []);
 
+  const getBackgroundColor = (label: string) => {
+    switch (label) {
+      case 'Calls': return 'rgba(31, 41, 55, 0.8)';
+      case 'Forms': return 'rgba(55, 65, 81, 0.8)';
+      case 'Emails': return 'rgba(167, 243, 208, 0.8)';
+      case 'Other': return 'rgba(216, 180, 254, 0.8)';
+      default: return 'rgba(107, 114, 128, 0.8)';
+    }
+  };
+
+  const getBorderColor = (label: string) => {
+    switch (label) {
+      case 'Calls': return 'rgba(31, 41, 55, 1)';
+      case 'Forms': return 'rgba(55, 65, 81, 1)';
+      case 'Emails': return 'rgba(167, 243, 208, 1)';
+      case 'Other': return 'rgba(216, 180, 254, 1)';
+      default: return 'rgba(107, 114, 128, 1)';
+    }
+  };
+
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-2xl font-bold">All leads</CardTitle>
+        <CardTitle className="text-2xl font-bold">All channels</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
             <SelectTrigger className="w-[180px]">
