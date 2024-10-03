@@ -50,15 +50,17 @@ const LeadsChart = () => {
                 stacked: true,
                 beginAtZero: true,
                 max: 100,
-                ticks: {
-                  callback: function(value) {
-                    return value + '%';
-                  }
+                display: false, // Hide x-axis
+                grid: {
+                  display: false // Hide x-axis grid lines
                 }
               },
               y: {
                 stacked: true,
-                display: false
+                display: false, // Hide y-axis
+                grid: {
+                  display: false // Hide y-axis grid lines
+                }
               }
             },
             plugins: {
