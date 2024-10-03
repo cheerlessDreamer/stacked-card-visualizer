@@ -29,7 +29,13 @@ const LeadsChart = () => {
               backgroundColor: getBackgroundColor(item.label),
               borderColor: getBorderColor(item.label),
               borderWidth: 1,
-              borderRadius: 8 // Add this line to round the corners
+              borderRadius: {
+                topLeft: 8,
+                topRight: 8,
+                bottomLeft: 8,
+                bottomRight: 8
+              },
+              borderSkipped: false
             }))
           },
           options: {
