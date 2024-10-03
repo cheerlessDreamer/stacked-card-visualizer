@@ -50,22 +50,23 @@ const LeadsChart = () => {
                 stacked: true,
                 beginAtZero: true,
                 max: 100,
-                display: false, // Hide x-axis
+                display: false,
                 grid: {
-                  display: false // Hide x-axis grid lines
+                  display: false
                 }
               },
               y: {
                 stacked: true,
-                display: false, // Hide y-axis
+                display: false,
                 grid: {
-                  display: false // Hide y-axis grid lines
+                  display: false
                 }
               }
             },
             plugins: {
               legend: {
-                position: 'bottom'
+                position: 'bottom',
+                align: 'start' // This aligns the legend to the left
               },
               tooltip: {
                 callbacks: {
