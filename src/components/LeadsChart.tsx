@@ -87,6 +87,17 @@ const LeadsChart = () => {
                   padding: 20,
                   boxWidth: 10,
                   boxHeight: 10,
+                },
+                onClick: (e, legendItem, legend) => {
+                  const index = legendItem.index;
+                  const ci = legend.chart;
+                  if (ci.isDatasetVisible(index)) {
+                    ci.hide(index);
+                    legendItem.hidden = true;
+                  } else {
+                    ci.show(index);
+                    legendItem.hidden = false;
+                  }
                 }
               },
               tooltip: {
@@ -104,7 +115,69 @@ const LeadsChart = () => {
                 }
               }
             }
-          }
+          },
+          plugins: [{
+            id: 'htmlLegend',
+            afterUpdate(chart, args, options) {
+              const ul = chart.canvas.parentNode?.querySelector('ul');
+              if (ul) {
+                // Clear existing legend items
+                while (ul.firstChild) {
+                  ul.firstChild.remove();
+                }
+
+                // Recreate legend items
+                const items = chart.options.plugins.legend.labels.generateLabels(chart);
+                items.forEach(item => {
+                  const li = document.createElement('li');
+                  li.style.alignItems = 'center';
+                  li.style.cursor = 'pointer';
+                  li.style.display = 'flex';
+                  li.style.flexDirection = 'row';
+                  li.style.marginLeft = '10px';
+
+                  li.onclick = () => {
+                    const type = chart.config.type;
+                    if (type === 'pie' || type === 'doughnut') {
+                      chart.toggleDataVisibility(item.index);
+                    } else {
+                      chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
+                    }
+                    chart.update();
+                  };
+
+                  // Color box
+                  const boxSpan = document.createElement('span');
+                  boxSpan.style.background = item.fillStyle as string;
+                  boxSpan.style.borderColor = item.strokeStyle as string;
+                  boxSpan.style.borderWidth = item.lineWidth + 'px';
+                  boxSpan.style.display = 'inline-block';
+                  boxSpan.style.height = '20px';
+                  boxSpan.style.marginRight = '10px';
+                  boxSpan.style.width = '20px';
+
+                  // Text
+                  const textContainer = document.createElement('p');
+                  textContainer.style.color = item.fontColor as string;
+                  textContainer.style.margin = '0';
+                  textContainer.style.padding = '0';
+                  textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+                  const text = item.text.split('<br>');
+                  textContainer.innerHTML = text[0];
+                  
+                  const strong = document.createElement('strong');
+                  strong.textContent = text[1].replace(/<\/?strong>/g, '');
+                  textContainer.appendChild(document.createElement('br'));
+                  textContainer.appendChild(strong);
+
+                  li.appendChild(boxSpan);
+                  li.appendChild(textContainer);
+                  ul.appendChild(li);
+                });
+              }
+            }
+          }]
         });
       }
     }
@@ -157,8 +230,9 @@ const LeadsChart = () => {
       </CardHeader>
       <CardContent>
         <div className="text-5xl font-bold mb-4">192</div>
-        <div className="w-full h-64">
+        <div className="w-full h-64 relative">
           <canvas ref={chartRef}></canvas>
+          <ul className="mt-4 list-none p-0"></ul>
         </div>
         <Button className="w-full mt-4 bg-green-400 hover:bg-green-500 text-white">Add WhatsApp</Button>
       </CardContent>
