@@ -4,6 +4,40 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import Chart from 'chart.js/auto';
 
+const getBackgroundColor = (label: string) => {
+  const colors = {
+    'Calls': 'rgba(31, 41, 55, 0.8)',
+    'Forms': 'rgba(55, 65, 81, 0.8)',
+    'Emails': 'rgba(167, 243, 208, 0.8)',
+    'Other': 'rgba(216, 180, 254, 0.8)'
+  };
+  return colors[label] || 'rgba(107, 114, 128, 0.8)';
+};
+
+const getBorderColor = (label: string) => {
+  const colors = {
+    'Calls': 'rgba(31, 41, 55, 1)',
+    'Forms': 'rgba(55, 65, 81, 1)',
+    'Emails': 'rgba(167, 243, 208, 1)',
+    'Other': 'rgba(216, 180, 254, 1)'
+  };
+  return colors[label] || 'rgba(107, 114, 128, 1)';
+};
+
+const createChartData = (totalLeads: number) => {
+  const data = [
+    { label: 'Calls', value: 101 },
+    { label: 'Forms', value: 59 },
+    { label: 'Emails', value: 21 },
+    { label: 'Other', value: 11 },
+  ];
+
+  return data.map(item => ({
+    ...item,
+    percentage: (item.value / totalLeads) * 100
+  }));
+};
+
 const LeadsChart = () => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
@@ -17,17 +51,7 @@ const LeadsChart = () => {
         }
 
         const totalLeads = 192;
-        const data = [
-          { label: 'Calls', value: 101 },
-          { label: 'Forms', value: 59 },
-          { label: 'Emails', value: 21 },
-          { label: 'Other', value: 11 },
-        ];
-
-        const percentages = data.map(item => ({
-          ...item,
-          percentage: (item.value / totalLeads) * 100
-        }));
+        const percentages = createChartData(totalLeads);
 
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
@@ -65,40 +89,7 @@ const LeadsChart = () => {
             },
             plugins: {
               legend: {
-                position: 'bottom',
-                align: 'start',
-                labels: {
-                  usePointStyle: true,
-                  pointStyle: 'circle',
-                  generateLabels: (chart) => {
-                    const datasets = chart.data.datasets;
-                    return datasets.map((dataset, i) => ({
-                      text: `${dataset.label}<br><strong>${data[i].value}</strong>`,
-                      fillStyle: dataset.backgroundColor as string,
-                      strokeStyle: dataset.borderColor as string,
-                      lineWidth: 1,
-                      hidden: false,
-                      index: i
-                    }));
-                  },
-                  font: {
-                    size: 12
-                  },
-                  padding: 20,
-                  boxWidth: 10,
-                  boxHeight: 10,
-                },
-                onClick: (e, legendItem, legend) => {
-                  const index = legendItem.index;
-                  const ci = legend.chart;
-                  if (ci.isDatasetVisible(index)) {
-                    ci.hide(index);
-                    legendItem.hidden = true;
-                  } else {
-                    ci.show(index);
-                    legendItem.hidden = false;
-                  }
-                }
+                display: false // Hide the original legend
               },
               tooltip: {
                 callbacks: {
@@ -108,7 +99,7 @@ const LeadsChart = () => {
                       label += ': ';
                     }
                     if (context.parsed.x !== null) {
-                      label += data.find(item => item.label === context.dataset.label)?.value;
+                      label += percentages.find(item => item.label === context.dataset.label)?.value;
                     }
                     return label;
                   }
@@ -127,7 +118,15 @@ const LeadsChart = () => {
                 }
 
                 // Recreate legend items
-                const items = chart.options.plugins.legend.labels.generateLabels(chart);
+                const items = chart.data.datasets.map((dataset, index) => ({
+                  text: dataset.label,
+                  fillStyle: dataset.backgroundColor as string,
+                  strokeStyle: dataset.borderColor as string,
+                  lineWidth: dataset.borderWidth,
+                  hidden: !chart.isDatasetVisible(index),
+                  index: index
+                }));
+
                 items.forEach(item => {
                   const li = document.createElement('li');
                   li.style.alignItems = 'center';
@@ -137,19 +136,14 @@ const LeadsChart = () => {
                   li.style.marginLeft = '10px';
 
                   li.onclick = () => {
-                    const type = chart.config.type;
-                    if (type === 'pie' || type === 'doughnut') {
-                      chart.toggleDataVisibility(item.index);
-                    } else {
-                      chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
-                    }
+                    chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
                     chart.update();
                   };
 
                   // Color box
                   const boxSpan = document.createElement('span');
-                  boxSpan.style.background = item.fillStyle as string;
-                  boxSpan.style.borderColor = item.strokeStyle as string;
+                  boxSpan.style.background = item.fillStyle;
+                  boxSpan.style.borderColor = item.strokeStyle;
                   boxSpan.style.borderWidth = item.lineWidth + 'px';
                   boxSpan.style.display = 'inline-block';
                   boxSpan.style.height = '20px';
@@ -158,17 +152,17 @@ const LeadsChart = () => {
 
                   // Text
                   const textContainer = document.createElement('p');
-                  textContainer.style.color = item.fontColor as string;
+                  textContainer.style.color = item.hidden ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)';
                   textContainer.style.margin = '0';
                   textContainer.style.padding = '0';
                   textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
 
-                  const text = item.text.split('<br>');
-                  textContainer.innerHTML = text[0];
-                  
-                  const strong = document.createElement('strong');
-                  strong.textContent = text[1].replace(/<\/?strong>/g, '');
+                  const labelText = document.createTextNode(item.text);
+                  textContainer.appendChild(labelText);
                   textContainer.appendChild(document.createElement('br'));
+
+                  const strong = document.createElement('strong');
+                  strong.textContent = percentages.find(p => p.label === item.text)?.value.toString() || '';
                   textContainer.appendChild(strong);
 
                   li.appendChild(boxSpan);
@@ -188,26 +182,6 @@ const LeadsChart = () => {
       }
     };
   }, []);
-
-  const getBackgroundColor = (label: string) => {
-    switch (label) {
-      case 'Calls': return 'rgba(31, 41, 55, 0.8)';
-      case 'Forms': return 'rgba(55, 65, 81, 0.8)';
-      case 'Emails': return 'rgba(167, 243, 208, 0.8)';
-      case 'Other': return 'rgba(216, 180, 254, 0.8)';
-      default: return 'rgba(107, 114, 128, 0.8)';
-    }
-  };
-
-  const getBorderColor = (label: string) => {
-    switch (label) {
-      case 'Calls': return 'rgba(31, 41, 55, 1)';
-      case 'Forms': return 'rgba(55, 65, 81, 1)';
-      case 'Emails': return 'rgba(167, 243, 208, 1)';
-      case 'Other': return 'rgba(216, 180, 254, 1)';
-      default: return 'rgba(107, 114, 128, 1)';
-    }
-  };
 
   return (
     <Card className="w-full max-w-3xl mx-auto">
