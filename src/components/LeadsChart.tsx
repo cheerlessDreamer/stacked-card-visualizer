@@ -19,7 +19,7 @@ const LeadsChart = () => {
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['Leads'],
+            labels: [''],  // Empty label to remove 'Leads'
             datasets: [
               {
                 label: 'Calls',
@@ -61,7 +61,8 @@ const LeadsChart = () => {
                 beginAtZero: true
               },
               y: {
-                stacked: true
+                stacked: true,
+                display: false  // Hide y-axis labels
               }
             },
             plugins: {
