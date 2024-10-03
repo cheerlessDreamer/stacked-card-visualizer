@@ -87,14 +87,20 @@ const LeadsChart = () => {
                   generateLabels: (chart) => {
                     const datasets = chart.data.datasets;
                     return datasets.map((dataset, i) => ({
-                      text: `${dataset.label}: ${data[i].value}`,
+                      text: `${dataset.label}\n<span style="font-weight: bold;">${data[i].value}</span>`,
                       fillStyle: dataset.backgroundColor as string,
                       strokeStyle: dataset.borderColor as string,
                       lineWidth: 1,
                       hidden: false,
                       index: i
                     }));
-                  }
+                  },
+                  font: {
+                    size: 12
+                  },
+                  padding: 20,
+                  boxWidth: 10,
+                  boxHeight: 10,
                 }
               },
               tooltip: {
