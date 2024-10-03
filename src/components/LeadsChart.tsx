@@ -29,6 +29,20 @@ const LeadsChart = () => {
           percentage: (item.value / totalLeads) * 100
         }));
 
+        const legendMarker = (color: string) => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 14;
+          canvas.height = 14;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(7, 7, 5, 0, 2 * Math.PI);
+            ctx.fill();
+          }
+          return canvas;
+        };
+
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -66,7 +80,22 @@ const LeadsChart = () => {
             plugins: {
               legend: {
                 position: 'bottom',
-                align: 'start'
+                align: 'start',
+                labels: {
+                  usePointStyle: true,
+                  pointStyle: 'circle',
+                  generateLabels: (chart) => {
+                    const datasets = chart.data.datasets;
+                    return datasets.map((dataset, i) => ({
+                      text: `${dataset.label}: ${data[i].value}`,
+                      fillStyle: dataset.backgroundColor as string,
+                      strokeStyle: dataset.borderColor as string,
+                      lineWidth: 1,
+                      hidden: false,
+                      index: i
+                    }));
+                  }
+                }
               },
               tooltip: {
                 callbacks: {
