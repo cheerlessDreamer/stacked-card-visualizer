@@ -67,6 +67,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
         }
       }
     },
+
     plugins: [{
       id: 'htmlLegend',
       afterUpdate(chart, args, options) {
@@ -98,7 +99,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           items.forEach(item => {
             const li = document.createElement('li');
             li.style.display = 'flex';
-            li.style.alignItems = 'center';
+            li.style.alignItems = 'flex-start'; // Changed from 'center' to 'flex-start'
             li.style.cursor = 'pointer';
             li.style.marginBottom = '8px';
 
@@ -117,6 +118,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.height = '12px';
             circleSpan.style.borderRadius = '50%';
             circleSpan.style.marginRight = '8px';
+            circleSpan.style.marginTop = '4px'; // Added to align with the first line of text
 
             // Text container
             const textContainer = document.createElement('div');
