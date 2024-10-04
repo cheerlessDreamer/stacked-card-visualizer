@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import ProTip from '../components/ProTip';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 const backgroundColors = ['#F9F6F0', '#1F4447', '#F7F1E5', '#2F5D63', 'white', '#E7B6F6', '#B1F2B3'];
@@ -89,8 +90,9 @@ const Index = () => {
     setBackgroundColor(color);
   };
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-8 relative" style={{ backgroundColor }}>
+
+return (
+  <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-8 relative" style={{ backgroundColor }}>
       <LeadsChart 
         totalLeads={totalLeads} 
         leadData={leadData.slice(0, numBlocks)} 
@@ -98,8 +100,8 @@ const Index = () => {
         cardWidth={cardWidth}
         chartHeight={chartHeight}
       />
-      
-      <div className="fixed bottom-4 right-4 flex flex-col space-y-4">
+    
+    <div className="fixed bottom-4 right-4 flex flex-col space-y-4">
         <Drawer>
           <DrawerTrigger asChild>
             <Button className="rounded-full w-16 h-16 shadow-lg">
@@ -145,41 +147,37 @@ const Index = () => {
           </PopoverContent>
         </Popover>
 
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="rounded-full w-16 h-16 shadow-lg">
-              <HelpCircle className="w-6 h-6" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
-            <DialogHeader>
-              <DialogTitle>Kaisa Chart Creator Help</DialogTitle>
-              <DialogDescription>
-                This tool helps Kaisa staff create chart screenshots for customer presentations.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="py-4">
-              <h3 className="font-semibold mb-2">How to use:</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Edit Button (Pencil):</strong> Customize chart data, title, and dimensions.</li>
-                <li><strong>Color Button (Palette):</strong> Change the background color of the chart area.</li>
-                <li><strong>Chart:</strong> Displays lead source data visually.</li>
-                <li><strong>Templates:</strong> Quick-start with predefined chart configurations.</li>
-              </ul>
-              <p className="mt-4">Adjust values, colors, and layout to create the perfect chart for your presentation.</p>
-              
-              <h3 className="font-semibold mt-6 mb-2">Pro Tip: Taking Screenshots on Mac</h3>
-              <ul className="list-disc pl-5 space-y-2">
-                <li><strong>Cmd + Shift + 4:</strong> Take a screenshot of a selected area and save it as a file.</li>
-                <li><strong>Cmd + Ctrl + Shift + 4:</strong> Take a screenshot of a selected area and save it to the clipboard.</li>
-              </ul>
-              <p className="mt-2">Use these shortcuts to capture your chart for easy sharing in presentations!</p>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="rounded-full w-16 h-16 shadow-lg">
+            <HelpCircle className="w-6 h-6" />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Kaisa Chart Creator Help</DialogTitle>
+            <DialogDescription>
+              This tool helps Kaisa staff create chart screenshots for customer presentations.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            <h3 className="font-semibold mb-2">How to use:</h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong>Edit Button (Pencil):</strong> Customize chart data, title, and dimensions.</li>
+              <li><strong>Color Button (Palette):</strong> Change the background color of the chart area.</li>
+              <li><strong>Chart:</strong> Displays lead source data visually.</li>
+              <li><strong>Templates:</strong> Quick-start with predefined chart configurations.</li>
+            </ul>
+            <p className="mt-4">Adjust values, colors, and layout to create the perfect chart for your presentation.</p>
+            
+            <div className="mt-6">
+              <ProTip />
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
-  );
-};
+  </div>
+);
 
 export default Index;
