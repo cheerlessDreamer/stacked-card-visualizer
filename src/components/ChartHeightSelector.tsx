@@ -10,8 +10,8 @@ interface ChartHeightSelectorProps {
 export const ChartHeightSelector: React.FC<ChartHeightSelectorProps> = ({ chartHeight, onChartHeightChange }) => {
   const heightOptions = [
     { label: 'Small', value: '24px' },
-    { label: 'Medium', value: '40px' },
-    { label: 'Large', value: '80px' },
+    { label: 'Medium', value: '80px' },
+    { label: 'Large', value: '240px' },
     { label: 'Sassy', value: '400px' },
   ];
 
