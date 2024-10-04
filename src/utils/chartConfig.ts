@@ -114,11 +114,11 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.borderColor = item.strokeStyle;
             circleSpan.style.borderWidth = item.lineWidth + 'px';
             circleSpan.style.display = 'inline-block';
-            circleSpan.style.width = '8px'; // Changed from 10px to 8px
-            circleSpan.style.height = '8px'; // Changed from 10px to 8px
+            circleSpan.style.width = '8px';
+            circleSpan.style.height = '8px';
             circleSpan.style.borderRadius = '50%';
             circleSpan.style.marginRight = '8px';
-            circleSpan.style.marginTop = '4px';
+            circleSpan.style.marginTop = '6px'; // Changed from 4px to 6px
 
             // Text container
             const textContainer = document.createElement('div');
