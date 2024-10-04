@@ -98,8 +98,8 @@ const LeadsChart = () => {
                 }));
 
                 ul.style.display = 'flex';
-                ul.style.justifyContent = 'space-around';
                 ul.style.flexWrap = 'wrap';
+                ul.style.gap = '16px'; // Set fixed gap between legend items
 
                 items.forEach(item => {
                   const li = document.createElement('li');
@@ -107,7 +107,6 @@ const LeadsChart = () => {
                   li.style.cursor = 'pointer';
                   li.style.display = 'flex';
                   li.style.flexDirection = 'row';
-                  li.style.marginRight = '10px';
 
                   li.onclick = () => {
                     chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
