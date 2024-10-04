@@ -3,8 +3,16 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit, Palette } from 'lucide-react';
+import { Edit, Palette, HelpCircle } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 const backgroundColors = ['#F9F6F0', '#1F4447', '#F7F1E5', '#2F5D63', 'white', '#E7B6F6', '#B1F2B3'];
@@ -136,6 +144,32 @@ const Index = () => {
             </div>
           </PopoverContent>
         </Popover>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="rounded-full w-16 h-16 shadow-lg">
+              <HelpCircle className="w-6 h-6" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Kaisa Chart Creator Help</DialogTitle>
+              <DialogDescription>
+                This tool helps Kaisa staff create chart screenshots for customer presentations.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="py-4">
+              <h3 className="font-semibold mb-2">How to use:</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Edit Button (Pencil):</strong> Customize chart data, title, and dimensions.</li>
+                <li><strong>Color Button (Palette):</strong> Change the background color of the chart area.</li>
+                <li><strong>Chart:</strong> Displays lead source data visually.</li>
+                <li><strong>Templates:</strong> Quick-start with predefined chart configurations.</li>
+              </ul>
+              <p className="mt-4">Adjust values, colors, and layout to create the perfect chart for your presentation.</p>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
