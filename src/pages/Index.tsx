@@ -4,6 +4,7 @@ import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Edit } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
