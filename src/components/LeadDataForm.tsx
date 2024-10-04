@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Pencil } from 'lucide-react';
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number; color: string }[];
@@ -16,16 +18,19 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, nu
     <div className="mt-4">
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
       <div className="mb-4">
-        <label htmlFor="numBlocks" className="block text-sm font-medium text-gray-700">Number of Blocks:</label>
-        <Input
-          id="numBlocks"
-          type="number"
-          min="3"
-          max="5"
-          value={numBlocks}
-          onChange={(e) => onNumBlocksChange(parseInt(e.target.value))}
-          className="mt-1 block w-full"
-        />
+        <Label className="block text-sm font-medium text-gray-700 mb-2">Number of Blocks:</Label>
+        <RadioGroup
+          value={numBlocks.toString()}
+          onValueChange={(value) => onNumBlocksChange(parseInt(value))}
+          className="flex space-x-4"
+        >
+          {[3, 4, 5].map((num) => (
+            <div key={num} className="flex items-center space-x-2">
+              <RadioGroupItem value={num.toString()} id={`blocks-${num}`} />
+              <Label htmlFor={`blocks-${num}`}>{num}</Label>
+            </div>
+          ))}
+        </RadioGroup>
       </div>
       <div className="grid grid-cols-3 gap-4">
         {leadData.map((item, index) => (
