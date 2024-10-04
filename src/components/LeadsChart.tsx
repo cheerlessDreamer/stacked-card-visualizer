@@ -46,7 +46,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
       <CardContent className="flex flex-col pt-1">
-        <div className="text-5xl font-light mb-5">{totalLeads.toLocaleString()}</div>
+        <div className="text-5xl font-thin mb-5">{totalLeads.toLocaleString()}</div>
         <div style={{ height: chartHeight }}>
           <canvas ref={chartRef}></canvas>
         </div>
