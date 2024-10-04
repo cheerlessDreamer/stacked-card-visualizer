@@ -8,10 +8,9 @@ interface LeadsChartProps {
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
   cardWidth: string;
-  cardHeight: string;
 }
 
-const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth, cardHeight }) => {
+const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
 
@@ -19,7 +18,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
     if (leadData && leadData.length > 0) {
       updateChart();
     }
-  }, [totalLeads, leadData, chartTitle, cardWidth, cardHeight]);
+  }, [totalLeads, leadData, chartTitle, cardWidth]);
 
   const updateChart = () => {
     if (chartRef.current && leadData && leadData.length > 0) {
@@ -37,9 +36,9 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const cardStyle = {
     width: cardWidth || '100%',
-    height: cardHeight || '650px',
     maxWidth: '100%',
-    minHeight: '400px',
+    minHeight: '800px',
+    height: 'auto'
   };
 
   return (
@@ -47,7 +46,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
-      <CardContent className="flex flex-col flex-grow pt-1 pb-6"> {/* Increased bottom padding */}
+      <CardContent className="flex flex-col flex-grow pt-1">
         <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>

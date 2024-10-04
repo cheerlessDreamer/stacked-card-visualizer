@@ -30,9 +30,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
       responsive: true,
       maintainAspectRatio: false,
       layout: {
-        padding: {
-          bottom: 20 // Add bottom padding to the chart
-        }
+        padding: 0
       },
       scales: {
         x: {
@@ -95,7 +93,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           ul.style.justifyContent = 'flex-start';
           ul.style.gap = '16px';
           ul.style.padding = '0';
-          ul.style.margin = '16px 0 0 0'; // Removed negative bottom margin
+          ul.style.margin = '16px 0 -16px 0'; // Changed from '16px 0 0 0' to '16px 0 -16px 0'
           ul.style.listStyle = 'none';
 
           items.forEach(item => {
@@ -120,7 +118,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.height = '8px';
             circleSpan.style.borderRadius = '50%';
             circleSpan.style.marginRight = '8px';
-            circleSpan.style.marginTop = '6px';
+            circleSpan.style.marginTop = '6px'; // Changed from 4px to 6px
 
             // Text container
             const textContainer = document.createElement('div');
