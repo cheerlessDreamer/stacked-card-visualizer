@@ -117,23 +117,28 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.marginRight = '8px';
             circleSpan.style.marginTop = '4px';
 
-            // Text
-            const textContainer = document.createElement('p');
-            textContainer.style.color = item.hidden ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)';
-            textContainer.style.margin = '0';
-            textContainer.style.padding = '0';
-            textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
-            textContainer.style.fontSize = '1rem';
+            // Text container
+            const textContainer = document.createElement('div');
+            textContainer.style.display = 'flex';
+            textContainer.style.flexDirection = 'column';
+            textContainer.style.alignItems = 'flex-start';
 
-            const labelText = document.createTextNode(item.text);
-            textContainer.appendChild(labelText);
-            textContainer.appendChild(document.createElement('br'));
+            // Label
+            const labelSpan = document.createElement('span');
+            labelSpan.textContent = item.text;
+            labelSpan.style.color = item.hidden ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)';
+            labelSpan.style.textDecoration = item.hidden ? 'line-through' : '';
+            labelSpan.style.fontSize = '1rem';
 
-            const strong = document.createElement('strong');
+            // Value
+            const valueSpan = document.createElement('span');
             const value = percentages.find(p => p.label === item.text)?.value;
-            strong.textContent = value ? value.toLocaleString() : '';
-            strong.style.marginLeft = '8px';
-            textContainer.appendChild(strong);
+            valueSpan.textContent = value ? value.toLocaleString() : '';
+            valueSpan.style.fontWeight = 'bold';
+            valueSpan.style.fontSize = '1rem';
+
+            textContainer.appendChild(labelSpan);
+            textContainer.appendChild(valueSpan);
 
             li.appendChild(circleSpan);
             li.appendChild(textContainer);
