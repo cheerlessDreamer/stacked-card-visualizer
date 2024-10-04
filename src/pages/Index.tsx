@@ -91,50 +91,52 @@ const Index = () => {
         chartHeight={chartHeight}
       />
       
-      <Drawer>
-        <DrawerTrigger asChild>
-          <Button className="fixed bottom-4 right-20 rounded-full w-16 h-16 shadow-lg">
-            <Edit className="w-6 h-6" />
-          </Button>
-        </DrawerTrigger>
-        <DrawerContent>
-          <div className="p-6 bg-white rounded-t-xl">
-            <LeadDataForm
-              leadData={leadData.slice(0, numBlocks)}
-              onInputChange={handleInputChange}
-              numBlocks={numBlocks}
-              onNumBlocksChange={handleNumBlocksChange}
-              onTemplateChange={handleTemplateChange}
-              chartTitle={chartTitle}
-              onChartTitleChange={setChartTitle}
-              cardWidth={cardWidth}
-              onCardWidthChange={handleCardWidthChange}
-              chartHeight={chartHeight}
-              onChartHeightChange={handleChartHeightChange}
-            />
-          </div>
-        </DrawerContent>
-      </Drawer>
-
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
-            <Palette className="w-6 h-6" />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-64">
-          <div className="grid grid-cols-4 gap-2">
-            {backgroundColors.map((color, index) => (
-              <Button
-                key={index}
-                className="w-10 h-10 rounded-full"
-                style={{ backgroundColor: color }}
-                onClick={() => handleBackgroundColorChange(color)}
+      <div className="fixed bottom-4 right-4 flex flex-col space-y-4">
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button className="rounded-full w-16 h-16 shadow-lg">
+              <Edit className="w-6 h-6" />
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="p-6 bg-white rounded-t-xl">
+              <LeadDataForm
+                leadData={leadData.slice(0, numBlocks)}
+                onInputChange={handleInputChange}
+                numBlocks={numBlocks}
+                onNumBlocksChange={handleNumBlocksChange}
+                onTemplateChange={handleTemplateChange}
+                chartTitle={chartTitle}
+                onChartTitleChange={setChartTitle}
+                cardWidth={cardWidth}
+                onCardWidthChange={handleCardWidthChange}
+                chartHeight={chartHeight}
+                onChartHeightChange={handleChartHeightChange}
               />
-            ))}
-          </div>
-        </PopoverContent>
-      </Popover>
+            </div>
+          </DrawerContent>
+        </Drawer>
+
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button className="rounded-full w-16 h-16 shadow-lg">
+              <Palette className="w-6 h-6" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-64">
+            <div className="grid grid-cols-4 gap-2">
+              {backgroundColors.map((color, index) => (
+                <Button
+                  key={index}
+                  className="w-10 h-10 rounded-full"
+                  style={{ backgroundColor: color }}
+                  onClick={() => handleBackgroundColorChange(color)}
+                />
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
     </div>
   );
 };
