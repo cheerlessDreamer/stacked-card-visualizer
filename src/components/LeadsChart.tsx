@@ -183,12 +183,9 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
               <SelectValue placeholder="Channel" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Channels</SelectItem>
-              <SelectItem value="calls">Calls</SelectItem>
-              <SelectItem value="forms">Forms</SelectItem>
-              <SelectItem value="emails">Emails</SelectItem>
-              <SelectItem value="chats">Chats</SelectItem>
-              <SelectItem value="other">Other</SelectItem>
+              <SelectItem value="channel">Channel</SelectItem>
+              <SelectItem value="source">Source</SelectItem>
+              <SelectItem value="assignee">Assignee</SelectItem>
             </SelectContent>
           </Select>
         </div>
