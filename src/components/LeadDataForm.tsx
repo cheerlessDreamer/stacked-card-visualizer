@@ -114,7 +114,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   };
 
   return (
-    <div className="mt-4 relative pb-16"> {/* Added pb-16 for bottom padding */}
+    <div className="mt-4 relative pb-16">
       <div className="absolute top-0 right-0 w-48">
         <Select onValueChange={handleTemplateChange}>
           <SelectTrigger>
@@ -140,6 +140,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           className="w-full"
         />
       </div>
+
       <div className="mb-4">
         <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width (px):</Label>
         <Input
@@ -148,10 +149,12 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           onChange={handleCardWidthChange}
           className="w-full"
           placeholder="e.g., 768"
-          type="number"
-          min="0"
+          type="text"
+          inputMode="numeric"
+          pattern="\d*"
         />
       </div>
+
       <div className="mb-4">
         <Label className="block text-sm font-medium text-gray-700 mb-2">Number of Blocks:</Label>
         <RadioGroup
