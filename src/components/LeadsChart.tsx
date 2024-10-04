@@ -8,9 +8,10 @@ interface LeadsChartProps {
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
   cardWidth: string;
+  cardHeight: string;
 }
 
-const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth }) => {
+const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth, cardHeight }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
 
@@ -18,7 +19,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
     if (leadData && leadData.length > 0) {
       updateChart();
     }
-  }, [totalLeads, leadData, chartTitle, cardWidth]);
+  }, [totalLeads, leadData, chartTitle, cardWidth, cardHeight]);
 
   const updateChart = () => {
     if (chartRef.current && leadData && leadData.length > 0) {
@@ -36,9 +37,9 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const cardStyle = {
     width: cardWidth || '100%',
+    height: cardHeight || '600px',
     maxWidth: '100%',
-    minHeight: '800px',
-    height: 'auto'
+    minHeight: '400px',
   };
 
   return (
