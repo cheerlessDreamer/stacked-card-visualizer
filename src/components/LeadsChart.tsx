@@ -109,7 +109,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
   return (
     <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-base font-normal">All channels</CardTitle>
+        <CardTitle className="text-base font-normal text-1rem">All channels</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
             <SelectTrigger className="w-[180px]">
@@ -127,11 +127,11 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col h-full">
-        <div className="text-[40px] font-light mb-2">{totalLeads}</div>
+        <div className="text-2.5rem font-light mb-2">{totalLeads}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4 text-xs"></ul>
+        <ul id="chart-legend" className="mt-4 text-0.75rem"></ul>
       </CardContent>
     </Card>
   );

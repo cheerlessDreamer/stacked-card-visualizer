@@ -56,7 +56,7 @@ export const renderChartLegend = (chart, percentages) => {
       textContainer.style.margin = '0';
       textContainer.style.padding = '0';
       textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
-      textContainer.style.fontSize = '12px';
+      textContainer.style.fontSize = '0.75rem';
 
       const labelText = document.createTextNode(item.text);
       textContainer.appendChild(labelText);
