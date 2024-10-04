@@ -14,8 +14,6 @@ interface LeadDataFormProps {
   onChartTitleChange: (newTitle: string) => void;
   cardWidth: string;
   onCardWidthChange: (newWidth: string) => void;
-  cardHeight: string;
-  onCardHeightChange: (newHeight: string) => void;
 }
 
 interface LeadDataTemplate {
@@ -99,9 +97,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   chartTitle,
   onChartTitleChange,
   cardWidth,
-  onCardWidthChange,
-  cardHeight,
-  onCardHeightChange
+  onCardWidthChange
 }) => {
   const handleTemplateChange = (templateName: string) => {
     const selectedTemplate = templates.find(t => t.name === templateName);
@@ -110,14 +106,10 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
     }
   };
 
-  const handleDimensionChange = (e: React.ChangeEvent<HTMLInputElement>, dimensionType: 'width' | 'height') => {
+  const handleCardWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
-      if (dimensionType === 'width') {
-        onCardWidthChange(value ? `${value}px` : '');
-      } else {
-        onCardHeightChange(value ? `${value}px` : '');
-      }
+      onCardWidthChange(value ? `${value}px` : '');
     }
   };
 
@@ -149,33 +141,18 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div>
-          <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width (px):</Label>
-          <Input
-            id="card-width"
-            value={cardWidth.replace('px', '')}
-            onChange={(e) => handleDimensionChange(e, 'width')}
-            className="w-full"
-            placeholder="e.g., 768"
-            type="text"
-            inputMode="numeric"
-            pattern="\d*"
-          />
-        </div>
-        <div>
-          <Label htmlFor="card-height" className="block text-sm font-medium text-gray-700 mb-2">Card Height (px):</Label>
-          <Input
-            id="card-height"
-            value={cardHeight.replace('px', '')}
-            onChange={(e) => handleDimensionChange(e, 'height')}
-            className="w-full"
-            placeholder="e.g., 600"
-            type="text"
-            inputMode="numeric"
-            pattern="\d*"
-          />
-        </div>
+      <div className="mb-4">
+        <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width (px):</Label>
+        <Input
+          id="card-width"
+          value={cardWidth.replace('px', '')}
+          onChange={handleCardWidthChange}
+          className="w-full"
+          placeholder="e.g., 768"
+          type="text"
+          inputMode="numeric"
+          pattern="\d*"
+        />
       </div>
 
       <div className="mb-4">
