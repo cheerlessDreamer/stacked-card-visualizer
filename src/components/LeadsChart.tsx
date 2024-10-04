@@ -14,11 +14,13 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
   const chartInstance = useRef<Chart | null>(null);
 
   useEffect(() => {
-    updateChart();
+    if (leadData && leadData.length > 0) {
+      updateChart();
+    }
   }, [totalLeads, leadData]);
 
   const updateChart = () => {
-    if (chartRef.current) {
+    if (chartRef.current && leadData && leadData.length > 0) {
       const ctx = chartRef.current.getContext('2d');
       if (ctx) {
         if (chartInstance.current) {
@@ -166,6 +168,10 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
       }
     }
   };
+
+  if (!leadData || leadData.length === 0) {
+    return <div>No lead data available</div>;
+  }
 
   return (
     <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl">
