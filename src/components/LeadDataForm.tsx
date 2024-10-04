@@ -48,11 +48,11 @@ const templates: LeadDataTemplate[] = [
   {
     name: "Leads - by source",
     data: [
-      { label: 'Blocket', value: 16414, color: '#1F4447' },
+      { label: 'Blocket', value: 8901, color: '#1F4447' },  // Changed from 16414 to 8901
       { label: 'Finance', value: 5199, color: '#2F5D63' },
       { label: 'OEM', value: 877, color: '#97EA98' },
       { label: 'Direct', value: 801, color: '#B8FFBA' },
-      { label: 'Other', value: 231, color: '#EEC843' },  // Changed from 77 to 231
+      { label: 'Other', value: 404, color: '#EEC843' },  // Changed from 231 to 404
     ],
     chartTitle: "Leads by Source"
   },
