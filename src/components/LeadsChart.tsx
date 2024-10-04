@@ -51,7 +51,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4 flex-shrink-0 justify-start"></ul>
+        <ul id="chart-legend" className="mt-6 flex-shrink-0 justify-start"></ul>
       </CardContent>
     </Card>
   );
