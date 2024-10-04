@@ -89,7 +89,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
 
           ul.style.display = 'flex';
           ul.style.flexWrap = 'wrap';
-          ul.style.justifyContent = 'center';
+          ul.style.justifyContent = 'flex-start'; // Changed from 'center' to 'flex-start'
           ul.style.gap = '16px';
           ul.style.padding = '0';
           ul.style.margin = '16px 0 0 0';

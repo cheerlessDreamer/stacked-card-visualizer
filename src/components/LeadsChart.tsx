@@ -37,8 +37,8 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   const cardStyle = {
     width: cardWidth || '100%',
     maxWidth: '100%',
-    minHeight: '800px',  // Changed from fixed height to minHeight
-    height: 'auto'  // Allow the card to grow based on content
+    minHeight: '800px',
+    height: 'auto'
   };
 
   return (
@@ -51,7 +51,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4 flex-shrink-0"></ul>
+        <ul id="chart-legend" className="mt-4 flex-shrink-0 justify-start"></ul>
       </CardContent>
     </Card>
   );
