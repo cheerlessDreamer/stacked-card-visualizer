@@ -13,9 +13,13 @@ const Index = () => {
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
-  const handleInputChange = (index: number, value: string) => {
+  const handleInputChange = (index: number, field: 'label' | 'value', value: string) => {
     const newLeadData = [...leadData];
-    newLeadData[index].value = parseInt(value) || 0;
+    if (field === 'value') {
+      newLeadData[index][field] = parseInt(value) || 0;
+    } else {
+      newLeadData[index][field] = value;
+    }
     setLeadData(newLeadData);
   };
 
