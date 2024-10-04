@@ -41,10 +41,17 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const handleDownload = () => {
     if (cardRef.current) {
-      html2canvas(cardRef.current).then(canvas => {
+      const scale = 2; // Increase resolution
+      html2canvas(cardRef.current, {
+        scale: scale,
+        backgroundColor: null,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+      }).then(canvas => {
         const link = document.createElement('a');
         link.download = 'leads-chart.png';
-        link.href = canvas.toDataURL();
+        link.href = canvas.toDataURL('image/png');
         link.click();
       });
     }
@@ -56,16 +63,16 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   };
 
   return (
-    <Card className="mx-auto p-2 rounded-2xl flex flex-col" style={cardStyle} ref={cardRef}>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+    <Card className="mx-auto p-6 rounded-2xl flex flex-col" style={cardStyle} ref={cardRef}>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
         <Button onClick={handleDownload} variant="outline" size="icon">
           <Download className="h-4 w-4" />
         </Button>
       </CardHeader>
-      <CardContent className="flex flex-col pt-1">
-        <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
-        <div style={{ height: chartHeight }}>
+      <CardContent className="flex flex-col pt-2">
+        <div className="text-5xl font-extralight mb-6">{totalLeads.toLocaleString()}</div>
+        <div style={{ height: chartHeight, padding: '8px 0' }}>
           <canvas ref={chartRef}></canvas>
         </div>
         <ul id="chart-legend" className="mt-6 justify-start"></ul>
