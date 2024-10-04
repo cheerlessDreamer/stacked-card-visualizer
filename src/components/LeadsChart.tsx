@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Chart from 'chart.js/auto';
 import { createChartConfig } from '../utils/chartConfig';
 import { Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 interface LeadsChartProps {
   totalLeads: number;
