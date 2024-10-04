@@ -36,7 +36,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto p-6 rounded-2xl">
+    <Card className="w-full max-w-3xl mx-auto p-4 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <EditableTitle initialTitle={chartTitle} onTitleChange={setChartTitle} />
         <div className="flex items-center space-x-2">
