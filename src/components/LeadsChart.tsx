@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Chart from 'chart.js/auto';
 import { createChartData, getLighterColor } from '../utils/chartUtils';
-import { renderChartLegend } from './ChartLegend';
 
 interface LeadsChartProps {
   totalLeads: number;
@@ -93,8 +92,76 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
           },
           plugins: [{
             id: 'htmlLegend',
-            afterUpdate(chart) {
-              renderChartLegend(chart, percentages);
+            afterUpdate(chart, args, options) {
+              const ul = document.getElementById('chart-legend');
+              if (ul) {
+                // Clear existing legend items
+                while (ul.firstChild) {
+                  ul.firstChild.remove();
+                }
+
+                // Recreate legend items
+                const items = chart.data.datasets.map((dataset, index) => ({
+                  text: dataset.label,
+                  fillStyle: dataset.backgroundColor as string,
+                  strokeStyle: dataset.borderColor as string,
+                  lineWidth: dataset.borderWidth,
+                  hidden: !chart.isDatasetVisible(index),
+                  index: index
+                }));
+
+                ul.style.display = 'flex';
+                ul.style.flexWrap = 'wrap';
+                ul.style.gap = '16px';
+                ul.style.padding = '0';
+                ul.style.margin = '16px 0 0 0';
+                ul.style.listStyle = 'none';
+
+                items.forEach(item => {
+                  const li = document.createElement('li');
+                  li.style.alignItems = 'flex-start';
+                  li.style.cursor = 'pointer';
+                  li.style.display = 'flex';
+                  li.style.flexDirection = 'row';
+                  li.style.width = 'auto';
+
+                  li.onclick = () => {
+                    chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
+                    chart.update();
+                  };
+
+                  // Color circle
+                  const circleSpan = document.createElement('span');
+                  circleSpan.style.background = item.fillStyle;
+                  circleSpan.style.borderColor = item.strokeStyle;
+                  circleSpan.style.borderWidth = item.lineWidth + 'px';
+                  circleSpan.style.display = 'inline-block';
+                  circleSpan.style.width = '12px';
+                  circleSpan.style.height = '12px';
+                  circleSpan.style.borderRadius = '50%';
+                  circleSpan.style.marginRight = '8px';
+                  circleSpan.style.marginTop = '4px';
+
+                  // Text
+                  const textContainer = document.createElement('p');
+                  textContainer.style.color = item.hidden ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)';
+                  textContainer.style.margin = '0';
+                  textContainer.style.padding = '0';
+                  textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+
+                  const labelText = document.createTextNode(item.text);
+                  textContainer.appendChild(labelText);
+                  textContainer.appendChild(document.createElement('br'));
+
+                  const strong = document.createElement('strong');
+                  strong.textContent = percentages.find(p => p.label === item.text)?.value.toString() || '';
+                  textContainer.appendChild(strong);
+
+                  li.appendChild(circleSpan);
+                  li.appendChild(textContainer);
+                  ul.appendChild(li);
+                });
+              }
             }
           }]
         });
@@ -109,7 +176,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
   return (
     <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-base font-normal text-1rem">All channels</CardTitle>
+        <CardTitle className="text-2xl font-normal">All channels</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
             <SelectTrigger className="w-[180px]">
@@ -127,11 +194,11 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
         </div>
       </CardHeader>
       <CardContent className="flex flex-col h-full">
-        <div className="text-2.5rem font-light mb-2">{totalLeads}</div>
+        <div className="text-5xl font-light mb-2">{totalLeads}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4 text-0.75rem"></ul>
+        <ul id="chart-legend" className="mt-4"></ul>
       </CardContent>
     </Card>
   );
