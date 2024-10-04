@@ -29,7 +29,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'WhatsApp', value: 15, color: '#94BAFA' },
       { label: 'Other', value: 10, color: '#E7B6F6' },
     ],
-    chartTitle: "Leads"
+    chartTitle: "Lead Sources"
   },
   {
     name: "Leads - by assignee",
@@ -40,7 +40,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'Anders', value: 99, color: '#FFE381' },
       { label: 'Jörgen', value: 61, color: '#E7B6F6' },
     ],
-    chartTitle: "Leads"
+    chartTitle: "Leads by Assignee"
   },
   {
     name: "Leads - by source",
@@ -51,7 +51,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'Direct', value: 801, color: '#B8FFBA' },
       { label: 'Other', value: 77, color: '#EEC843' },
     ],
-    chartTitle: "Leads"
+    chartTitle: "Leads by Source"
   },
   {
     name: "Calls - by quality",
@@ -61,7 +61,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'Dropped', value: 20, color: '#EEC843' },
       { label: 'Missed', value: 15, color: '#E87C69' },
     ],
-    chartTitle: "Calls"
+    chartTitle: "Calls by Quality"
   },
   {
     name: "Leads - by channel",
@@ -72,7 +72,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'WhatsApp', value: 15, color: '#B8FFBA' },
       { label: 'Other', value: 10, color: '#E7B6F6' },
     ],
-    chartTitle: "Leads"
+    chartTitle: "Leads by Channel"
   },
   {
     name: "Core audiences",
@@ -81,7 +81,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'Returning buyers', value: 2818, color: '#314C8A' },
       { label: 'One-shot buyers', value: 994, color: '#E4AEF2' },
     ],
-    chartTitle: "Leads"
+    chartTitle: "Core Audiences"
   },
 ];
 
