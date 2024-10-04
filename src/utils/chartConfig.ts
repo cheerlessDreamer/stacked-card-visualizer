@@ -116,7 +116,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             textContainer.style.margin = '0';
             textContainer.style.padding = '0';
             textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
-            textContainer.style.fontSize = '0.75rem';
+            textContainer.style.fontSize = '1rem'; // Increased font size here
 
             const labelText = document.createTextNode(item.text);
             textContainer.appendChild(labelText);
