@@ -87,8 +87,13 @@ const Index = () => {
     }
   };
 
+  const handleCustomColorChange = (newColor: string) => {
+    setCustomColor(newColor);
+    setBackgroundColor(newColor);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-8 relative" style={{ backgroundColor: backgroundColor === 'custom' ? customColor : backgroundColor }}>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-8 relative" style={{ backgroundColor }}>
       <LeadsChart 
         totalLeads={totalLeads} 
         leadData={leadData.slice(0, numBlocks)} 
@@ -139,19 +144,14 @@ const Index = () => {
               />
             ))}
           </div>
-          {backgroundColor === 'custom' && (
-            <div className="mt-2">
-              <Input
-                type="color"
-                value={customColor}
-                onChange={(e) => {
-                  setCustomColor(e.target.value);
-                  setBackgroundColor(e.target.value);
-                }}
-                className="w-full h-10"
-              />
-            </div>
-          )}
+          <div className="mt-2">
+            <Input
+              type="color"
+              value={customColor}
+              onChange={(e) => handleCustomColorChange(e.target.value)}
+              className="w-full h-10"
+            />
+          </div>
         </PopoverContent>
       </Popover>
     </div>
