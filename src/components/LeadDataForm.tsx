@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Pencil } from 'lucide-react';
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number; color: string }[];
@@ -96,8 +95,6 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   chartTitle,
   onChartTitleChange
 }) => {
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-
   const handleTemplateChange = (templateName: string) => {
     const selectedTemplate = templates.find(t => t.name === templateName);
     if (selectedTemplate) {
@@ -150,26 +147,12 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
       <div className="grid grid-cols-3 gap-4">
         {leadData.map((item, index) => (
           <div key={index} className="flex items-center space-x-2">
-            <div 
-              className="w-20 relative group cursor-pointer"
-              onClick={() => setEditingIndex(index)}
-            >
-              {editingIndex === index ? (
-                <Input
-                  type="text"
-                  value={item.label}
-                  onChange={(e) => onInputChange(index, 'label', e.target.value)}
-                  onBlur={() => setEditingIndex(null)}
-                  autoFocus
-                  className="w-full"
-                />
-              ) : (
-                <>
-                  <span>{item.label}</span>
-                  <Pencil className="h-4 w-4 absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </>
-              )}
-            </div>
+            <Input
+              type="text"
+              value={item.label}
+              onChange={(e) => onInputChange(index, 'label', e.target.value)}
+              className="w-full"
+            />
             <Input
               type="number"
               value={item.value}
