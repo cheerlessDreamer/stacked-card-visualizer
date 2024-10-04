@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit } from 'lucide-react';
+import { Edit, Copy } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -19,6 +20,8 @@ const Index = () => {
   const [chartTitle, setChartTitle] = useState("Lead Sources");
   const [cardWidth, setCardWidth] = useState("768px");
   const [chartHeight, setChartHeight] = useState("24px");
+
+  const chartRef = useRef(null);
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -73,16 +76,36 @@ const Index = () => {
     setChartHeight(newHeight);
   };
 
+  const handleExportImage = async () => {
+    if (chartRef.current) {
+      const canvas = await html2canvas(chartRef.current);
+      const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      const link = document.createElement('a');
+      link.download = 'lead-sources-chart.png';
+      link.href = image;
+      link.click();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <LeadsChart 
-        totalLeads={totalLeads} 
-        leadData={leadData.slice(0, numBlocks)} 
-        chartTitle={chartTitle}
-        cardWidth={cardWidth}
-        chartHeight={chartHeight}
-      />
+      <div ref={chartRef}>
+        <LeadsChart 
+          totalLeads={totalLeads} 
+          leadData={leadData.slice(0, numBlocks)} 
+          chartTitle={chartTitle}
+          cardWidth={cardWidth}
+          chartHeight={chartHeight}
+        />
+      </div>
       
+      <Button 
+        onClick={handleExportImage}
+        className="fixed bottom-24 right-4 rounded-full w-16 h-16 shadow-lg bg-white text-[#2F5D63]"
+      >
+        <Copy className="w-6 h-6" />
+      </Button>
+
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
