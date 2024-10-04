@@ -26,6 +26,30 @@ const Index = () => {
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
+
+  const saveCardAsImage = async () => {
+    if (chartRef.current) {
+      try {
+        // Wait for fonts to load
+        await document.fonts.ready;
+        
+        const dataUrl = await domtoimage.toPng(chartRef.current, {
+          quality: 0.95,
+          bgcolor: 'rgba(0,0,0,0)'  // Set transparent background
+        });
+        
+        const link = document.createElement('a');
+        link.download = 'lead-sources-chart.png';
+        link.href = dataUrl;
+        link.click();
+        toast.success('Chart saved as image!');
+      } catch (error) {
+        console.error('Error saving chart:', error);
+        toast.error('Failed to save chart. Please try again.');
+      }
+    }
+  };
+
   const handleInputChange = (index: number, field: 'label' | 'value' | 'color', value: string) => {
     const newLeadData = [...leadData];
     if (field === 'value') {
@@ -75,29 +99,6 @@ const Index = () => {
 
   const handleChartHeightChange = (newHeight: string) => {
     setChartHeight(newHeight);
-  };
-
-  const saveCardAsImage = async () => {
-    if (chartRef.current) {
-      try {
-        // Wait for fonts to load
-        await document.fonts.ready;
-        
-        const dataUrl = await domtoimage.toPng(chartRef.current, {
-          quality: 0.95,
-          bgcolor: 'rgba(0,0,0,0)'  // Set transparent background
-        });
-        
-        const link = document.createElement('a');
-        link.download = 'lead-sources-chart.png';
-        link.href = dataUrl;
-        link.click();
-        toast.success('Chart saved as image!');
-      } catch (error) {
-        console.error('Error saving chart:', error);
-        toast.error('Failed to save chart. Please try again.');
-      }
-    }
   };
 
   return (
