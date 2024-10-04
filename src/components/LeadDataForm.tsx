@@ -106,6 +106,13 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
     }
   };
 
+  const handleCardWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) {
+      onCardWidthChange(value ? `${value}px` : '');
+    }
+  };
+
   return (
     <div className="mt-4">
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
@@ -119,13 +126,15 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
         />
       </div>
       <div className="mb-4">
-        <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width:</Label>
+        <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width (px):</Label>
         <Input
           id="card-width"
-          value={cardWidth}
-          onChange={(e) => onCardWidthChange(e.target.value)}
+          value={cardWidth.replace('px', '')}
+          onChange={handleCardWidthChange}
           className="w-full"
-          placeholder="e.g., 768px or 48rem"
+          placeholder="e.g., 768"
+          type="number"
+          min="0"
         />
       </div>
       <div className="mb-4">

@@ -17,7 +17,7 @@ const Index = () => {
   ]);
   const [numBlocks, setNumBlocks] = useState(5);
   const [chartTitle, setChartTitle] = useState("Lead Sources");
-  const [cardWidth, setCardWidth] = useState("max-w-3xl");
+  const [cardWidth, setCardWidth] = useState("768px");
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -36,7 +36,6 @@ const Index = () => {
     setNumBlocks(validNumBlocks);
     
     if (validNumBlocks < leadData.length) {
-      // Remove blocks from the middle, keeping first and last
       const newLeadData = [
         leadData[0],
         ...leadData.slice(1, -1).slice(0, validNumBlocks - 2),
@@ -44,7 +43,6 @@ const Index = () => {
       ];
       setLeadData(newLeadData);
     } else if (validNumBlocks > leadData.length) {
-      // Add new blocks with default values and colors
       const newBlocks = Array(validNumBlocks - leadData.length).fill(0).map((_, index) => ({
         label: 'New',
         value: 10,

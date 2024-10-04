@@ -18,7 +18,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
     if (leadData && leadData.length > 0) {
       updateChart();
     }
-  }, [totalLeads, leadData, chartTitle]);
+  }, [totalLeads, leadData, chartTitle, cardWidth]);
 
   const updateChart = () => {
     if (chartRef.current && leadData && leadData.length > 0) {
@@ -34,8 +34,13 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
     }
   };
 
+  const cardStyle = {
+    width: cardWidth || '100%',
+    maxWidth: '100%'
+  };
+
   return (
-    <Card className={`w-full ${cardWidth} mx-auto p-2 rounded-2xl`}>
+    <Card className={`mx-auto p-2 rounded-2xl`} style={cardStyle}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
