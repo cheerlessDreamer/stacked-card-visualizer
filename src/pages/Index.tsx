@@ -19,17 +19,12 @@ const Index = () => {
     setLeadData(newLeadData);
   };
 
-  const handleUpdateChart = () => {
-    // The chart will update automatically due to state changes
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8">
       <LeadsChart totalLeads={totalLeads} leadData={leadData} />
       <LeadDataForm
         leadData={leadData}
         onInputChange={handleInputChange}
-        onUpdateChart={handleUpdateChart}
       />
     </div>
   );

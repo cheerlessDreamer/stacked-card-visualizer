@@ -1,14 +1,12 @@
 import React from 'react';
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number }[];
   onInputChange: (index: number, value: string) => void;
-  onUpdateChart: () => void;
 }
 
-const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, onUpdateChart }) => {
+const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange }) => {
   return (
     <div className="mt-8 bg-white p-6 rounded-xl shadow-md">
       <h3 className="text-lg font-semibold mb-4">Update Lead Data</h3>
@@ -25,7 +23,6 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, on
           </div>
         ))}
       </div>
-      <Button className="mt-4" onClick={onUpdateChart}>Update Chart</Button>
     </div>
   );
 };
