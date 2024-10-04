@@ -167,6 +167,13 @@ const Index = () => {
                 <li><strong>Templates:</strong> Quick-start with predefined chart configurations.</li>
               </ul>
               <p className="mt-4">Adjust values, colors, and layout to create the perfect chart for your presentation.</p>
+              
+              <h3 className="font-semibold mt-6 mb-2">Pro Tip: Taking Screenshots on Mac</h3>
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Cmd + Shift + 4:</strong> Take a screenshot of a selected area and save it as a file.</li>
+                <li><strong>Cmd + Ctrl + Shift + 4:</strong> Take a screenshot of a selected area and save it to the clipboard.</li>
+              </ul>
+              <p className="mt-2">Use these shortcuts to capture your chart for easy sharing in presentations!</p>
             </div>
           </DialogContent>
         </Dialog>
