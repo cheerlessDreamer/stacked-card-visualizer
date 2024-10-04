@@ -2,16 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Chart from 'chart.js/auto';
 import { createChartConfig } from '../utils/chartConfig';
-import EditableTitle from './EditableTitle';
 
 interface LeadsChartProps {
   totalLeads: number;
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
-  onTitleChange: (newTitle: string) => void;
 }
 
-const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, onTitleChange }) => {
+const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
 
@@ -38,7 +36,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   return (
     <Card className="w-full max-w-3xl mx-auto p-2 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
-        <EditableTitle initialTitle={chartTitle} onTitleChange={onTitleChange} className="font-light" />
+        <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
       <CardContent className="flex flex-col h-full pt-1">
         <div className="text-5xl font-extralight mb-1">{totalLeads.toLocaleString()}</div>

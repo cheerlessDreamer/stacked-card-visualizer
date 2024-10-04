@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from "@/components/ui/input";
-import { Pencil } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,6 +10,8 @@ interface LeadDataFormProps {
   numBlocks: number;
   onNumBlocksChange: (newNumBlocks: number) => void;
   onTemplateChange: (template: LeadDataTemplate) => void;
+  chartTitle: string;
+  onChartTitleChange: (newTitle: string) => void;
 }
 
 interface LeadDataTemplate {
@@ -85,9 +86,15 @@ const templates: LeadDataTemplate[] = [
   },
 ];
 
-const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, numBlocks, onNumBlocksChange, onTemplateChange }) => {
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-
+const LeadDataForm: React.FC<LeadDataFormProps> = ({ 
+  leadData, 
+  onInputChange, 
+  numBlocks, 
+  onNumBlocksChange, 
+  onTemplateChange,
+  chartTitle,
+  onChartTitleChange
+}) => {
   const handleTemplateChange = (templateName: string) => {
     const selectedTemplate = templates.find(t => t.name === templateName);
     if (selectedTemplate) {
@@ -98,6 +105,15 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, nu
   return (
     <div className="mt-4">
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
+      <div className="mb-4">
+        <Label htmlFor="chart-title" className="block text-sm font-medium text-gray-700 mb-2">Chart Title:</Label>
+        <Input
+          id="chart-title"
+          value={chartTitle}
+          onChange={(e) => onChartTitleChange(e.target.value)}
+          className="w-full"
+        />
+      </div>
       <div className="mb-4">
         <Label className="block text-sm font-medium text-gray-700 mb-2">Select Template:</Label>
         <Select onValueChange={handleTemplateChange}>

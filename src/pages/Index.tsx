@@ -71,7 +71,6 @@ const Index = () => {
         totalLeads={totalLeads} 
         leadData={leadData.slice(0, numBlocks)} 
         chartTitle={chartTitle}
-        onTitleChange={setChartTitle}
       />
       
       <Drawer>
@@ -88,6 +87,8 @@ const Index = () => {
               numBlocks={numBlocks}
               onNumBlocksChange={handleNumBlocksChange}
               onTemplateChange={handleTemplateChange}
+              chartTitle={chartTitle}
+              onChartTitleChange={setChartTitle}
             />
           </div>
         </DrawerContent>
