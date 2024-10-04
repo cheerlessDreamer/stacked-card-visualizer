@@ -41,7 +41,7 @@ const Index = () => {
       // Add new blocks with default values
       const newBlocks = Array(validNumBlocks - leadData.length).fill(0).map(() => ({
         label: 'New',
-        value: 0,
+        value: 10, // Changed initial value from 0 to 10
         color: '#' + Math.floor(Math.random()*16777215).toString(16) // Random color
       }));
       const newLeadData = [
