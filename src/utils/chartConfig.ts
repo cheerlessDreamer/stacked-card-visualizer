@@ -14,7 +14,13 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
         hoverBackgroundColor: getLighterColor(item.color, 15),
         borderColor: item.color,
         borderWidth: 0,
-        borderSkipped: false
+        borderSkipped: false,
+        borderRadius: {
+          topLeft: index === 0 ? 4 : 0,
+          topRight: index === percentages.length - 1 ? 4 : 0,
+          bottomLeft: index === 0 ? 4 : 0,
+          bottomRight: index === percentages.length - 1 ? 4 : 0,
+        },
       }))
     },
     options: {
