@@ -34,18 +34,18 @@ const templates: LeadDataTemplate[] = [
   {
     name: "Leads - by assignee",
     data: [
-      { label: 'Blocket', value: 24011, color: '#2FC9B7' },
-      { label: 'Finance', value: 5199, color: '#32D7C3' },
-      { label: 'OEM', value: 877, color: '#EEC843' },
-      { label: 'Direct', value: 801, color: '#FFE381' },
-      { label: 'Other', value: 77, color: '#E7B6F6' },
+      { label: 'Johan', value: 212, color: '#2FC9B7' },
+      { label: 'Stefan', value: 200, color: '#32D7C3' },
+      { label: 'Anna', value: 145, color: '#EEC843' },
+      { label: 'Anders', value: 99, color: '#FFE381' },
+      { label: 'Jörgen', value: 61, color: '#E7B6F6' },
     ],
     chartTitle: "Leads"
   },
   {
     name: "Leads - by source",
     data: [
-      { label: 'Blocket', value: 24011, color: '#1F4447' },
+      { label: 'Blocket', value: 16414, color: '#1F4447' },
       { label: 'Finance', value: 5199, color: '#2F5D63' },
       { label: 'OEM', value: 877, color: '#97EA98' },
       { label: 'Direct', value: 801, color: '#B8FFBA' },
