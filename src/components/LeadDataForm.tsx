@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Pencil } from 'lucide-react';
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number; color: string }[];
@@ -95,6 +96,8 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   chartTitle,
   onChartTitleChange
 }) => {
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
   const handleTemplateChange = (templateName: string) => {
     const selectedTemplate = templates.find(t => t.name === templateName);
     if (selectedTemplate) {

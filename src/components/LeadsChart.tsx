@@ -28,7 +28,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
         }
 
         const config = createChartConfig(totalLeads, leadData);
-        chartInstance.current = new Chart(ctx, config);
+        chartInstance.current = new Chart(ctx, config as any);
       }
     }
   };
