@@ -56,6 +56,7 @@ export const renderChartLegend = (chart, percentages) => {
       textContainer.style.margin = '0';
       textContainer.style.padding = '0';
       textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
+      textContainer.style.fontSize = '12px';
 
       const labelText = document.createTextNode(item.text);
       textContainer.appendChild(labelText);
@@ -63,6 +64,8 @@ export const renderChartLegend = (chart, percentages) => {
 
       const strong = document.createElement('strong');
       strong.textContent = percentages.find(p => p.label === item.text)?.value.toString() || '';
+      strong.style.marginTop = '8px';
+      strong.style.display = 'inline-block';
       textContainer.appendChild(strong);
 
       li.appendChild(circleSpan);
