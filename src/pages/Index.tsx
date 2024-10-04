@@ -78,8 +78,16 @@ const Index = () => {
 
   const handleExportImage = async () => {
     if (chartRef.current) {
-      const canvas = await html2canvas(chartRef.current);
-      const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      const scale = 2; // Increase resolution
+      const canvas = await html2canvas(chartRef.current, {
+        scale: scale,
+        backgroundColor: null,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+      });
+      
+      const image = canvas.toDataURL("image/png", 1.0);
       const link = document.createElement('a');
       link.download = 'lead-sources-chart.png';
       link.href = image;
@@ -89,7 +97,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <div ref={chartRef}>
+      <div ref={chartRef} className="bg-white rounded-2xl p-2">
         <LeadsChart 
           totalLeads={totalLeads} 
           leadData={leadData.slice(0, numBlocks)} 
