@@ -56,7 +56,8 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
                 label += ': ';
               }
               if (context.parsed.x !== null) {
-                label += percentages.find(item => item.label === context.dataset.label)?.value;
+                const value = percentages.find(item => item.label === context.dataset.label)?.value;
+                label += value ? value.toLocaleString() : '';
               }
               return label;
             }
@@ -122,14 +123,15 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             textContainer.style.margin = '0';
             textContainer.style.padding = '0';
             textContainer.style.textDecoration = item.hidden ? 'line-through' : '';
-            textContainer.style.fontSize = '1rem'; // Increased font size here
+            textContainer.style.fontSize = '1rem';
 
             const labelText = document.createTextNode(item.text);
             textContainer.appendChild(labelText);
             textContainer.appendChild(document.createElement('br'));
 
             const strong = document.createElement('strong');
-            strong.textContent = percentages.find(p => p.label === item.text)?.value.toString() || '';
+            const value = percentages.find(p => p.label === item.text)?.value;
+            strong.textContent = value ? value.toLocaleString() : '';
             strong.style.marginLeft = '8px';
             textContainer.appendChild(strong);
 

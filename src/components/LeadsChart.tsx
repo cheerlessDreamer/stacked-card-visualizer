@@ -40,7 +40,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
         <EditableTitle initialTitle={chartTitle} onTitleChange={setChartTitle} className="font-light" />
       </CardHeader>
       <CardContent className="flex flex-col h-full pt-1">
-        <div className="text-5xl font-extralight mb-1">{totalLeads}</div>
+        <div className="text-5xl font-extralight mb-1">{totalLeads.toLocaleString()}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
