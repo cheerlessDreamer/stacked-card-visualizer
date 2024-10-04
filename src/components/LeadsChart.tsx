@@ -104,7 +104,7 @@ const LeadsChart = () => {
                 ul.style.flexWrap = 'wrap';
                 ul.style.gap = '16px';
                 ul.style.padding = '0';
-                ul.style.margin = '0';
+                ul.style.margin = '16px 0 0 0'; // Add 16px top margin
                 ul.style.listStyle = 'none';
 
                 items.forEach(item => {
@@ -190,7 +190,7 @@ const LeadsChart = () => {
         <div className="w-full h-16 relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-0"></ul>
+        <ul id="chart-legend" className="mt-4"></ul>
       </CardContent>
     </Card>
   );
