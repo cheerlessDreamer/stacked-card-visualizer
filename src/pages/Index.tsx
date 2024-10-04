@@ -5,13 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Plus } from 'lucide-react';
 
+const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
+
 const Index = () => {
   const [leadData, setLeadData] = useState([
-    { label: 'Calls', value: 80, color: '#1F4447' },
-    { label: 'Forms', value: 50, color: '#2F5D63' },
-    { label: 'Emails', value: 30, color: '#97EA98' },
-    { label: 'Chats', value: 20, color: '#B8FFBA' },
-    { label: 'Other', value: 12, color: '#E7B6F6' },
+    { label: 'Calls', value: 80, color: defaultColors[0] },
+    { label: 'Forms', value: 50, color: defaultColors[1] },
+    { label: 'Emails', value: 30, color: defaultColors[2] },
+    { label: 'Chats', value: 20, color: defaultColors[3] },
+    { label: 'Other', value: 12, color: defaultColors[4] },
   ]);
   const [numBlocks, setNumBlocks] = useState(5);
 
@@ -31,7 +33,6 @@ const Index = () => {
     const validNumBlocks = Math.max(3, Math.min(5, newNumBlocks));
     setNumBlocks(validNumBlocks);
     
-    // Adjust leadData based on the new number of blocks
     if (validNumBlocks < leadData.length) {
       // Remove blocks from the middle, keeping first and last
       const newLeadData = [
@@ -41,11 +42,11 @@ const Index = () => {
       ];
       setLeadData(newLeadData);
     } else if (validNumBlocks > leadData.length) {
-      // Add new blocks with default values
-      const newBlocks = Array(validNumBlocks - leadData.length).fill(0).map(() => ({
+      // Add new blocks with default values and colors
+      const newBlocks = Array(validNumBlocks - leadData.length).fill(0).map((_, index) => ({
         label: 'New',
-        value: 10, // Changed initial value from 0 to 10
-        color: '#' + Math.floor(Math.random()*16777215).toString(16) // Random color
+        value: 10,
+        color: defaultColors[leadData.length + index]
       }));
       const newLeadData = [
         leadData[0],
