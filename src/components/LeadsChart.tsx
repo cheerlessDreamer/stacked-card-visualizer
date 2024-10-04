@@ -104,7 +104,7 @@ const LeadsChart = () => {
                 ul.style.flexWrap = 'wrap';
                 ul.style.gap = '16px';
                 ul.style.padding = '0';
-                ul.style.margin = '16px 0 0 0'; // Add 16px top margin
+                ul.style.margin = '16px 0 0 0';
                 ul.style.listStyle = 'none';
 
                 items.forEach(item => {
@@ -166,8 +166,8 @@ const LeadsChart = () => {
   }, []);
 
   return (
-    <Card className="w-full h-full max-w-full mx-auto p-8 rounded-2xl">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+    <Card className="w-full h-full max-w-full mx-auto p-8 rounded-2xl flex flex-col">
+      <CardHeader className="flex-shrink-0 flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-normal">All channels</CardTitle>
         <div className="flex items-center space-x-2">
           <Select>
@@ -185,12 +185,12 @@ const LeadsChart = () => {
           </Select>
         </div>
       </CardHeader>
-      <CardContent className="h-full flex flex-col">
-        <div className="text-5xl font-light mb-2">192</div>
+      <div className="text-5xl font-light mb-2 flex-shrink-0">192</div>
+      <CardContent className="flex-grow flex flex-col">
         <div className="flex-grow relative">
           <canvas ref={chartRef} className="w-full h-full"></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4"></ul>
+        <ul id="chart-legend" className="mt-4 flex-shrink-0"></ul>
       </CardContent>
     </Card>
   );
