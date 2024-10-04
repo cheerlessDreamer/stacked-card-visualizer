@@ -41,7 +41,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   };
 
   return (
-    <Card className="mx-auto p-2 rounded-2xl flex flex-col" style={cardStyle}>
+    <Card className="mx-auto p-2 rounded-2xl flex flex-col border-0" style={cardStyle}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
