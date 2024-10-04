@@ -80,7 +80,14 @@ const Index = () => {
   const saveCardAsImage = async () => {
     if (chartRef.current) {
       try {
-        const dataUrl = await domtoimage.toPng(chartRef.current);
+        // Wait for fonts to load
+        await document.fonts.ready;
+        
+        const dataUrl = await domtoimage.toPng(chartRef.current, {
+          quality: 0.95,
+          bgcolor: '#fff'
+        });
+        
         const link = document.createElement('a');
         link.download = 'lead-sources-chart.png';
         link.href = dataUrl;
