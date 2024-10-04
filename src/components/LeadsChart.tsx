@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Chart from 'chart.js/auto';
 import { createChartConfig } from '../utils/chartConfig';
 import EditableTitle from './EditableTitle';
@@ -39,18 +38,6 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
     <Card className="w-full max-w-3xl mx-auto p-2 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <EditableTitle initialTitle={chartTitle} onTitleChange={setChartTitle} />
-        <div className="flex items-center space-x-2">
-          <Select defaultValue="channel">
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Channel" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="channel">Channel</SelectItem>
-              <SelectItem value="source">Source</SelectItem>
-              <SelectItem value="assignee">Assignee</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
       </CardHeader>
       <CardContent className="flex flex-col h-full pt-1">
         <div className="text-5xl font-light mb-1">{totalLeads}</div>
