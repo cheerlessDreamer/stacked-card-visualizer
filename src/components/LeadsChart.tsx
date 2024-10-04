@@ -43,6 +43,9 @@ const LeadsChart = () => {
             indexAxis: 'y',
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+              padding: 0
+            },
             scales: {
               x: {
                 stacked: true,
