@@ -80,7 +80,7 @@ const LeadsChart = () => {
           plugins: [{
             id: 'htmlLegend',
             afterUpdate(chart, args, options) {
-              const ul = chart.canvas.parentNode?.querySelector('ul');
+              const ul = document.getElementById('chart-legend');
               if (ul) {
                 // Clear existing legend items
                 while (ul.firstChild) {
@@ -99,7 +99,10 @@ const LeadsChart = () => {
 
                 ul.style.display = 'flex';
                 ul.style.flexWrap = 'wrap';
-                ul.style.gap = '16px'; // Set fixed gap between legend items
+                ul.style.gap = '16px';
+                ul.style.padding = '0';
+                ul.style.margin = '0';
+                ul.style.listStyle = 'none';
 
                 items.forEach(item => {
                   const li = document.createElement('li');
@@ -107,6 +110,7 @@ const LeadsChart = () => {
                   li.style.cursor = 'pointer';
                   li.style.display = 'flex';
                   li.style.flexDirection = 'row';
+                  li.style.width = 'auto';
 
                   li.onclick = () => {
                     chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
@@ -180,8 +184,8 @@ const LeadsChart = () => {
         <div className="text-5xl font-light mb-4">192</div>
         <div className="w-full h-64 relative">
           <canvas ref={chartRef}></canvas>
-          <ul className="mt-4 list-none p-0"></ul>
         </div>
+        <ul id="chart-legend" className="mt-4"></ul>
       </CardContent>
     </Card>
   );
