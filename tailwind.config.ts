@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
       },
       fontWeight: {
         light: '300',
