@@ -114,7 +114,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   };
 
   return (
-    <div className="mt-4 relative">
+    <div className="mt-4 relative pb-16"> {/* Added pb-16 for bottom padding */}
       <div className="absolute top-0 right-0 w-48">
         <Select onValueChange={handleTemplateChange}>
           <SelectTrigger>
