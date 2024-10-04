@@ -37,20 +37,21 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   const cardStyle = {
     width: cardWidth || '100%',
     maxWidth: '100%',
-    height: '800px'  // Set the height to 800px
+    minHeight: '800px',  // Changed from fixed height to minHeight
+    height: 'auto'  // Allow the card to grow based on content
   };
 
   return (
-    <Card className={`mx-auto p-2 rounded-2xl`} style={cardStyle}>
+    <Card className="mx-auto p-2 rounded-2xl flex flex-col" style={cardStyle}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
-      <CardContent className="flex flex-col h-full pt-1">
+      <CardContent className="flex flex-col flex-grow pt-1">
         <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-2"></ul>
+        <ul id="chart-legend" className="mt-4 flex-shrink-0"></ul>
       </CardContent>
     </Card>
   );

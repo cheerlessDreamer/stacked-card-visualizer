@@ -89,6 +89,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
 
           ul.style.display = 'flex';
           ul.style.flexWrap = 'wrap';
+          ul.style.justifyContent = 'center';
           ul.style.gap = '16px';
           ul.style.padding = '0';
           ul.style.margin = '16px 0 0 0';
@@ -96,11 +97,10 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
 
           items.forEach(item => {
             const li = document.createElement('li');
-            li.style.alignItems = 'flex-start';
-            li.style.cursor = 'pointer';
             li.style.display = 'flex';
-            li.style.flexDirection = 'row';
-            li.style.width = 'auto';
+            li.style.alignItems = 'center';
+            li.style.cursor = 'pointer';
+            li.style.marginBottom = '8px';
 
             li.onclick = () => {
               chart.setDatasetVisibility(item.index, !chart.isDatasetVisible(item.index));
@@ -117,7 +117,6 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.height = '12px';
             circleSpan.style.borderRadius = '50%';
             circleSpan.style.marginRight = '8px';
-            circleSpan.style.marginTop = '4px';
 
             // Text container
             const textContainer = document.createElement('div');
@@ -130,14 +129,14 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             labelSpan.textContent = item.text;
             labelSpan.style.color = item.hidden ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 1)';
             labelSpan.style.textDecoration = item.hidden ? 'line-through' : '';
-            labelSpan.style.fontSize = '1rem';
+            labelSpan.style.fontSize = '0.875rem';
 
             // Value
             const valueSpan = document.createElement('span');
             const value = percentages.find(p => p.label === item.text)?.value;
             valueSpan.textContent = value ? value.toLocaleString() : '';
             valueSpan.style.fontWeight = 'bold';
-            valueSpan.style.fontSize = '1rem';
+            valueSpan.style.fontSize = '0.875rem';
 
             textContainer.appendChild(labelSpan);
             textContainer.appendChild(valueSpan);
