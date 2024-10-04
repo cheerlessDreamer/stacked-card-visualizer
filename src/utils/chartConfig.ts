@@ -21,6 +21,8 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           bottomLeft: index === 0 ? 8 : 0,
           bottomRight: index === percentages.length - 1 ? 8 : 0,
         },
+        barPercentage: 1.0,
+        categoryPercentage: 1.0,
       }))
     },
     options: {
