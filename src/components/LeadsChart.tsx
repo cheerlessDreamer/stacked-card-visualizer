@@ -33,7 +33,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
           type: 'bar',
           data: {
             labels: [''],
-            datasets: percentages.map((item) => ({
+            datasets: percentages.map((item, index) => ({
               label: item.label,
               data: [item.percentage],
               backgroundColor: item.color,
@@ -41,10 +41,10 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
               borderColor: item.color,
               borderWidth: 0,
               borderRadius: {
-                topLeft: 8,
-                topRight: 8,
-                bottomLeft: 8,
-                bottomRight: 8
+                topLeft: index === 0 ? 8 : 0,
+                topRight: index === percentages.length - 1 ? 8 : 0,
+                bottomLeft: index === 0 ? 8 : 0,
+                bottomRight: index === percentages.length - 1 ? 8 : 0
               },
               borderSkipped: false
             }))
