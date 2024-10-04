@@ -152,7 +152,7 @@ const Index = () => {
               <HelpCircle className="w-6 h-6" />
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[600px]"> {/* Updated width here */}
             <DialogHeader>
               <DialogTitle>Kaisa Chart Creator Help</DialogTitle>
               <DialogDescription>
