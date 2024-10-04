@@ -58,7 +58,7 @@ const templates: LeadDataTemplate[] = [
     data: [
       { label: 'Qualified', value: 30, color: '#335797' },
       { label: 'Unqualified', value: 25, color: '#94BAFA' },
-      { label: 'Dropped', value: 20, color: '#97EA98' },
+      { label: 'Dropped', value: 20, color: '#EEC843' },
       { label: 'Missed', value: 15, color: '#E87C69' },
     ],
     chartTitle: "Calls"
