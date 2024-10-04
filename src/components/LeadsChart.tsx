@@ -37,8 +37,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   const cardStyle = {
     width: cardWidth || '100%',
     maxWidth: '100%',
-    minHeight: '800px',
-    height: 'auto'
+    height: '240px'  // Changed from 'minHeight: '800px', height: 'auto'' to 'height: '240px''
   };
 
   return (
