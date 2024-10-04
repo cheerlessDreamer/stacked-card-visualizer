@@ -1,11 +1,10 @@
-import { ChartConfiguration } from 'chart.js';
 import { createChartData, getLighterColor } from './chartUtils';
 
-export const createChartConfig = (totalLeads: number, leadData: { label: string; value: number; color: string }[]): ChartConfiguration => {
+export const createChartConfig = (totalLeads: number, leadData: { label: string; value: number; color: string }[]) => {
   const percentages = createChartData(totalLeads, leadData);
 
   return {
-    type: 'bar' as const,  // Explicitly specify the chart type
+    type: 'bar',
     data: {
       labels: [''],
       datasets: percentages.map((item, index) => ({
@@ -15,7 +14,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
         hoverBackgroundColor: getLighterColor(item.color, 15),
         borderColor: item.color,
         borderWidth: 0,
-        borderSkipped: false as const,
+        borderSkipped: false,
         borderRadius: {
           topLeft: index === 0 ? 8 : 0,
           topRight: index === percentages.length - 1 ? 8 : 0,

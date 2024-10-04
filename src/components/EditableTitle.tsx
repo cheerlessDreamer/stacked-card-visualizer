@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
+import { Pencil } from 'lucide-react';
+import { Input } from "@/components/ui/input";
 
 interface EditableTitleProps {
   initialTitle: string;
   onTitleChange: (newTitle: string) => void;
-  className?: string;
 }
 
-const EditableTitle: React.FC<EditableTitleProps> = ({ initialTitle, onTitleChange, className }) => {
+const EditableTitle: React.FC<EditableTitleProps> = ({ initialTitle, onTitleChange }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(initialTitle);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setIsEditing(false);
-      onTitleChange(title);
-    }
   };
 
   const handleBlur = () => {
@@ -27,21 +21,21 @@ const EditableTitle: React.FC<EditableTitleProps> = ({ initialTitle, onTitleChan
   };
 
   return (
-    <div className={className}>
+    <div className="relative group cursor-pointer" onClick={() => setIsEditing(true)}>
       {isEditing ? (
-        <input
+        <Input
           type="text"
           value={title}
           onChange={handleTitleChange}
-          onKeyDown={handleKeyDown}
           onBlur={handleBlur}
           autoFocus
-          className="bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500"
+          className="w-full"
         />
       ) : (
-        <h2 onClick={() => setIsEditing(true)} className="cursor-pointer">
-          {title}
-        </h2>
+        <>
+          <span className="text-2xl font-normal">{title}</span>
+          <Pencil className="h-4 w-4 absolute right-0 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
+        </>
       )}
     </div>
   );
