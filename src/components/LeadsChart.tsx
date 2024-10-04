@@ -183,8 +183,8 @@ const LeadsChart = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-5xl font-light mb-4">192</div>
-        <div className="w-full h-64 relative">
+        <div className="text-5xl font-light mb-2">192</div>
+        <div className="w-full h-64 relative mb-4">
           <canvas ref={chartRef}></canvas>
         </div>
         <ul id="chart-legend" className="mt-4"></ul>
