@@ -20,16 +20,8 @@ export const getBorderColor = (label: string) => {
   return colors[label] || '#2F5D63';
 };
 
-export const createChartData = (totalLeads: number) => {
-  const data = [
-    { label: 'Calls', value: 80 },
-    { label: 'Forms', value: 50 },
-    { label: 'Emails', value: 30 },
-    { label: 'Chats', value: 20 },
-    { label: 'Other', value: 12 },
-  ];
-
-  return data.map(item => ({
+export const createChartData = (totalLeads: number, leadData: { label: string; value: number }[]) => {
+  return leadData.map(item => ({
     ...item,
     percentage: (item.value / totalLeads) * 100
   }));

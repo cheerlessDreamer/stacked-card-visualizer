@@ -1,14 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Chart from 'chart.js/auto';
 import { createChartData, getBackgroundColor, getBorderColor, getLighterColor } from '../utils/chartUtils';
 
 const LeadsChart = () => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
+  const [totalLeads, setTotalLeads] = useState(192);
+  const [leadData, setLeadData] = useState([
+    { label: 'Calls', value: 80 },
+    { label: 'Forms', value: 50 },
+    { label: 'Emails', value: 30 },
+    { label: 'Chats', value: 20 },
+    { label: 'Other', value: 12 },
+  ]);
 
-  useEffect(() => {
+  const updateChart = () => {
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
       if (ctx) {
@@ -16,8 +26,7 @@ const LeadsChart = () => {
           chartInstance.current.destroy();
         }
 
-        const totalLeads = 192;
-        const percentages = createChartData(totalLeads);
+        const percentages = createChartData(totalLeads, leadData);
 
         chartInstance.current = new Chart(ctx, {
           type: 'bar',
@@ -104,7 +113,7 @@ const LeadsChart = () => {
                 ul.style.flexWrap = 'wrap';
                 ul.style.gap = '16px';
                 ul.style.padding = '0';
-                ul.style.margin = '16px 0 0 0'; // Add 16px top margin
+                ul.style.margin = '16px 0 0 0';
                 ul.style.listStyle = 'none';
 
                 items.forEach(item => {
@@ -157,16 +166,21 @@ const LeadsChart = () => {
         });
       }
     }
+  };
 
-    return () => {
-      if (chartInstance.current) {
-        chartInstance.current.destroy();
-      }
-    };
-  }, []);
+  useEffect(() => {
+    updateChart();
+  }, [totalLeads, leadData]);
+
+  const handleInputChange = (index: number, value: string) => {
+    const newLeadData = [...leadData];
+    newLeadData[index].value = parseInt(value) || 0;
+    setLeadData(newLeadData);
+    setTotalLeads(newLeadData.reduce((sum, item) => sum + item.value, 0));
+  };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl"> {/* Updated this line */}
+    <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-normal">All channels</CardTitle>
         <div className="flex items-center space-x-2">
@@ -185,12 +199,29 @@ const LeadsChart = () => {
           </Select>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="text-5xl font-light mb-2">192</div>
-        <div className="w-full h-16 relative">
+      <CardContent className="flex flex-col h-full">
+        <div className="text-5xl font-light mb-2">{totalLeads}</div>
+        <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
         <ul id="chart-legend" className="mt-4"></ul>
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold mb-4">Update Lead Data</h3>
+          <div className="grid grid-cols-2 gap-4">
+            {leadData.map((item, index) => (
+              <div key={item.label} className="flex items-center space-x-2">
+                <label className="w-20">{item.label}:</label>
+                <Input
+                  type="number"
+                  value={item.value}
+                  onChange={(e) => handleInputChange(index, e.target.value)}
+                  className="w-24"
+                />
+              </div>
+            ))}
+          </div>
+          <Button className="mt-4" onClick={updateChart}>Update Chart</Button>
+        </div>
       </CardContent>
     </Card>
   );
