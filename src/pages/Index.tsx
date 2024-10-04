@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
+import { Button } from "@/components/ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Plus } from 'lucide-react';
 
 const Index = () => {
   const [leadData, setLeadData] = useState([
@@ -55,14 +58,26 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
       <LeadsChart totalLeads={totalLeads} leadData={leadData.slice(0, numBlocks)} />
-      <LeadDataForm
-        leadData={leadData.slice(0, numBlocks)}
-        onInputChange={handleInputChange}
-        numBlocks={numBlocks}
-        onNumBlocksChange={handleNumBlocksChange}
-      />
+      
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
+            <Plus className="w-6 h-6" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="p-4 bg-white rounded-t-xl">
+            <LeadDataForm
+              leadData={leadData.slice(0, numBlocks)}
+              onInputChange={handleInputChange}
+              numBlocks={numBlocks}
+              onNumBlocksChange={handleNumBlocksChange}
+            />
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };

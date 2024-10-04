@@ -13,8 +13,8 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, nu
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   return (
-    <div className="mt-8 bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Update Lead Data</h3>
+    <div className="mt-4">
+      <h3 className="text-lg font-semibold mb-4">Update Data</h3>
       <div className="mb-4">
         <label htmlFor="numBlocks" className="block text-sm font-medium text-gray-700">Number of Blocks:</label>
         <Input
