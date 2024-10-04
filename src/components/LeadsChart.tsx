@@ -37,7 +37,6 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   const cardStyle = {
     width: cardWidth || '100%',
     maxWidth: '100%',
-    height: '240px'  // Changed from 'minHeight: '800px', height: 'auto'' to 'height: '240px''
   };
 
   return (
@@ -45,12 +44,12 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
-      <CardContent className="flex flex-col flex-grow pt-1">
+      <CardContent className="flex flex-col pt-1">
         <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
-        <div className="flex-grow relative">
+        <div className="h-6"> {/* Set height to 24px (6 in Tailwind is 24px) */}
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-6 flex-shrink-0 justify-start"></ul>
+        <ul id="chart-legend" className="mt-6 justify-start"></ul>
       </CardContent>
     </Card>
   );
