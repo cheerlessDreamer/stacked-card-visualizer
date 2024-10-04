@@ -84,7 +84,7 @@ const Index = () => {
           </Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="p-4 bg-white rounded-t-xl">
+          <div className="p-6 bg-white rounded-t-xl">
             <LeadDataForm
               leadData={leadData.slice(0, numBlocks)}
               onInputChange={handleInputChange}

@@ -114,7 +114,22 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   };
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 relative">
+      <div className="absolute top-0 right-0 w-48">
+        <Select onValueChange={handleTemplateChange}>
+          <SelectTrigger>
+            <SelectValue placeholder="Choose a template" />
+          </SelectTrigger>
+          <SelectContent>
+            {templates.map((template) => (
+              <SelectItem key={template.name} value={template.name}>
+                {template.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
       <div className="mb-4">
         <Label htmlFor="chart-title" className="block text-sm font-medium text-gray-700 mb-2">Chart Title:</Label>
@@ -136,21 +151,6 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           type="number"
           min="0"
         />
-      </div>
-      <div className="mb-4">
-        <Label className="block text-sm font-medium text-gray-700 mb-2">Select Template:</Label>
-        <Select onValueChange={handleTemplateChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Choose a template" />
-          </SelectTrigger>
-          <SelectContent>
-            {templates.map((template) => (
-              <SelectItem key={template.name} value={template.name}>
-                {template.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
       </div>
       <div className="mb-4">
         <Label className="block text-sm font-medium text-gray-700 mb-2">Number of Blocks:</Label>
