@@ -17,6 +17,7 @@ const Index = () => {
   ]);
   const [numBlocks, setNumBlocks] = useState(5);
   const [chartTitle, setChartTitle] = useState("Lead Sources");
+  const [cardWidth, setCardWidth] = useState("max-w-3xl");
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -65,12 +66,17 @@ const Index = () => {
     setChartTitle(template.chartTitle);
   };
 
+  const handleCardWidthChange = (newWidth: string) => {
+    setCardWidth(newWidth);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
       <LeadsChart 
         totalLeads={totalLeads} 
         leadData={leadData.slice(0, numBlocks)} 
         chartTitle={chartTitle}
+        cardWidth={cardWidth}
       />
       
       <Drawer>
@@ -89,6 +95,8 @@ const Index = () => {
               onTemplateChange={handleTemplateChange}
               chartTitle={chartTitle}
               onChartTitleChange={setChartTitle}
+              cardWidth={cardWidth}
+              onCardWidthChange={handleCardWidthChange}
             />
           </div>
         </DrawerContent>

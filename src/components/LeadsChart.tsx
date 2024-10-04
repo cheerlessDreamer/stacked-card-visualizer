@@ -7,9 +7,10 @@ interface LeadsChartProps {
   totalLeads: number;
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
+  cardWidth: string;
 }
 
-const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle }) => {
+const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
 
@@ -34,7 +35,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto p-2 rounded-2xl">
+    <Card className={`w-full ${cardWidth} mx-auto p-2 rounded-2xl`}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>

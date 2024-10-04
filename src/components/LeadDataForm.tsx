@@ -12,6 +12,8 @@ interface LeadDataFormProps {
   onTemplateChange: (template: LeadDataTemplate) => void;
   chartTitle: string;
   onChartTitleChange: (newTitle: string) => void;
+  cardWidth: string;
+  onCardWidthChange: (newWidth: string) => void;
 }
 
 interface LeadDataTemplate {
@@ -93,7 +95,9 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   onNumBlocksChange, 
   onTemplateChange,
   chartTitle,
-  onChartTitleChange
+  onChartTitleChange,
+  cardWidth,
+  onCardWidthChange
 }) => {
   const handleTemplateChange = (templateName: string) => {
     const selectedTemplate = templates.find(t => t.name === templateName);
@@ -112,6 +116,16 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           value={chartTitle}
           onChange={(e) => onChartTitleChange(e.target.value)}
           className="w-full"
+        />
+      </div>
+      <div className="mb-4">
+        <Label htmlFor="card-width" className="block text-sm font-medium text-gray-700 mb-2">Card Width:</Label>
+        <Input
+          id="card-width"
+          value={cardWidth}
+          onChange={(e) => onCardWidthChange(e.target.value)}
+          className="w-full"
+          placeholder="e.g., 768px or 48rem"
         />
       </div>
       <div className="mb-4">
