@@ -8,9 +8,10 @@ interface LeadsChartProps {
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
   cardWidth: string;
+  cardHeight: string; // New prop
 }
 
-const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth }) => {
+const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth, cardHeight }) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
   const chartInstance = useRef<Chart | null>(null);
 
@@ -18,7 +19,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
     if (leadData && leadData.length > 0) {
       updateChart();
     }
-  }, [totalLeads, leadData, chartTitle, cardWidth]);
+  }, [totalLeads, leadData, chartTitle, cardWidth, cardHeight]);
 
   const updateChart = () => {
     if (chartRef.current && leadData && leadData.length > 0) {
@@ -36,9 +37,9 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const cardStyle = {
     width: cardWidth || '100%',
+    height: cardHeight || 'auto',
     maxWidth: '100%',
-    minHeight: '800px',
-    height: 'auto'
+    minHeight: '400px', // Set a minimum height
   };
 
   return (
@@ -51,7 +52,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-6 flex-shrink-0 justify-start"></ul>
+        <ul id="chart-legend" className="mt-4 flex-shrink-0 justify-start"></ul>
       </CardContent>
     </Card>
   );
