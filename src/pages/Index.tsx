@@ -1,11 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit, Download } from 'lucide-react';
-import domtoimage from 'dom-to-image';
-import { toast } from 'sonner';
+import { Edit } from 'lucide-react';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -21,8 +19,6 @@ const Index = () => {
   const [chartTitle, setChartTitle] = useState("Lead Sources");
   const [cardWidth, setCardWidth] = useState("768px");
   const [chartHeight, setChartHeight] = useState("24px");
-
-  const chartRef = useRef<HTMLDivElement>(null);
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -77,48 +73,16 @@ const Index = () => {
     setChartHeight(newHeight);
   };
 
-  const saveCardAsImage = async () => {
-    if (chartRef.current) {
-      try {
-        // Wait for fonts to load
-        await document.fonts.ready;
-        
-        const dataUrl = await domtoimage.toPng(chartRef.current, {
-          quality: 0.95,
-          bgcolor: 'rgba(0,0,0,0)'  // Set transparent background
-        });
-        
-        const link = document.createElement('a');
-        link.download = 'lead-sources-chart.png';
-        link.href = dataUrl;
-        link.click();
-        toast.success('Chart saved as image!');
-      } catch (error) {
-        console.error('Error saving chart:', error);
-        toast.error('Failed to save chart. Please try again.');
-      }
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <div ref={chartRef}>
-        <LeadsChart 
-          totalLeads={totalLeads} 
-          leadData={leadData.slice(0, numBlocks)} 
-          chartTitle={chartTitle}
-          cardWidth={cardWidth}
-          chartHeight={chartHeight}
-        />
-      </div>
+      <LeadsChart 
+        totalLeads={totalLeads} 
+        leadData={leadData.slice(0, numBlocks)} 
+        chartTitle={chartTitle}
+        cardWidth={cardWidth}
+        chartHeight={chartHeight}
+      />
       
-      <Button
-        onClick={saveCardAsImage}
-        className="fixed bottom-24 right-4 rounded-full w-16 h-16 shadow-lg bg-white text-[#2F5D63]"
-      >
-        <Download className="w-6 h-6" />
-      </Button>
-
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
