@@ -16,10 +16,10 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
         borderWidth: 0,
         borderSkipped: false,
         borderRadius: {
-          topLeft: index === 0 ? 4 : 0,
-          topRight: index === percentages.length - 1 ? 4 : 0,
-          bottomLeft: index === 0 ? 4 : 0,
-          bottomRight: index === percentages.length - 1 ? 4 : 0,
+          topLeft: index === 0 ? 8 : 0,
+          topRight: index === percentages.length - 1 ? 8 : 0,
+          bottomLeft: index === 0 ? 8 : 0,
+          bottomRight: index === percentages.length - 1 ? 8 : 0,
         },
       }))
     },
