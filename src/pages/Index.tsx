@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit } from 'lucide-react';
+import { Edit, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -73,16 +74,49 @@ const Index = () => {
     setChartHeight(newHeight);
   };
 
+  const chartRef = useRef(null);
+
+  const captureChart = async () => {
+    if (chartRef.current) {
+      const canvas = await html2canvas(chartRef.current, {
+        scale: 2, // Increase resolution
+        useCORS: true, // Enable CORS for any external resources
+        allowTaint: true,
+        logging: false,
+        onclone: (clonedDoc) => {
+          // Force any custom fonts to load in the cloned document
+          const style = clonedDoc.createElement('style');
+          style.textContent = `
+            @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+            * { font-family: 'Space Grotesk', sans-serif !important; }
+          `;
+          clonedDoc.head.appendChild(style);
+        }
+      });
+      
+      const link = document.createElement('a');
+      link.download = 'chart.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <LeadsChart 
-        totalLeads={totalLeads} 
-        leadData={leadData.slice(0, numBlocks)} 
-        chartTitle={chartTitle}
-        cardWidth={cardWidth}
-        chartHeight={chartHeight}
-      />
+      <div ref={chartRef}>
+        <LeadsChart 
+          totalLeads={totalLeads} 
+          leadData={leadData.slice(0, numBlocks)} 
+          chartTitle={chartTitle}
+          cardWidth={cardWidth}
+          chartHeight={chartHeight}
+        />
+      </div>
       
+      <Button onClick={captureChart} className="fixed bottom-20 right-4 rounded-full w-16 h-16 shadow-lg">
+        <Download className="w-6 h-6" />
+      </Button>
+
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
