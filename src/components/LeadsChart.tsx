@@ -106,7 +106,7 @@ const LeadsChart = () => {
 
                 items.forEach(item => {
                   const li = document.createElement('li');
-                  li.style.alignItems = 'center';
+                  li.style.alignItems = 'flex-start';
                   li.style.cursor = 'pointer';
                   li.style.display = 'flex';
                   li.style.flexDirection = 'row';
@@ -117,15 +117,17 @@ const LeadsChart = () => {
                     chart.update();
                   };
 
-                  // Color box
-                  const boxSpan = document.createElement('span');
-                  boxSpan.style.background = item.fillStyle;
-                  boxSpan.style.borderColor = item.strokeStyle;
-                  boxSpan.style.borderWidth = item.lineWidth + 'px';
-                  boxSpan.style.display = 'inline-block';
-                  boxSpan.style.height = '20px';
-                  boxSpan.style.marginRight = '10px';
-                  boxSpan.style.width = '20px';
+                  // Color circle
+                  const circleSpan = document.createElement('span');
+                  circleSpan.style.background = item.fillStyle;
+                  circleSpan.style.borderColor = item.strokeStyle;
+                  circleSpan.style.borderWidth = item.lineWidth + 'px';
+                  circleSpan.style.display = 'inline-block';
+                  circleSpan.style.width = '12px';
+                  circleSpan.style.height = '12px';
+                  circleSpan.style.borderRadius = '50%';
+                  circleSpan.style.marginRight = '8px';
+                  circleSpan.style.marginTop = '4px';
 
                   // Text
                   const textContainer = document.createElement('p');
@@ -142,7 +144,7 @@ const LeadsChart = () => {
                   strong.textContent = percentages.find(p => p.label === item.text)?.value.toString() || '';
                   textContainer.appendChild(strong);
 
-                  li.appendChild(boxSpan);
+                  li.appendChild(circleSpan);
                   li.appendChild(textContainer);
                   ul.appendChild(li);
                 });
