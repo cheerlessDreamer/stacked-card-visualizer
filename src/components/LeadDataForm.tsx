@@ -21,56 +21,67 @@ interface LeadDataTemplate {
 
 const templates: LeadDataTemplate[] = [
   {
-    name: "Default",
+    name: "Leads - alternative colours",
     data: [
-      { label: 'Calls', value: 80, color: '#1F4447' },
-      { label: 'Forms', value: 50, color: '#2F5D63' },
-      { label: 'Emails', value: 30, color: '#97EA98' },
-      { label: 'Chats', value: 20, color: '#B8FFBA' },
-      { label: 'Other', value: 12, color: '#E7B6F6' },
+      { label: 'Calls', value: 30, color: '#1FE6CE' },
+      { label: 'Forms', value: 25, color: '#335797' },
+      { label: 'Emails', value: 20, color: '#587DBD' },
+      { label: 'WhatsApp', value: 15, color: '#94BAFA' },
+      { label: 'Other', value: 10, color: '#E7B6F6' },
     ],
-    chartTitle: "Lead Sources"
+    chartTitle: "Leads"
   },
   {
-    name: "Sales Funnel",
+    name: "Leads - by assignee",
     data: [
-      { label: 'Awareness', value: 100, color: '#FF6B6B' },
-      { label: 'Interest', value: 70, color: '#4ECDC4' },
-      { label: 'Desire', value: 40, color: '#45B7D1' },
-      { label: 'Action', value: 20, color: '#1A535C' },
+      { label: 'Blocket', value: 24011, color: '#2FC9B7' },
+      { label: 'Finance', value: 5199, color: '#32D7C3' },
+      { label: 'OEM', value: 877, color: '#EEC843' },
+      { label: 'Direct', value: 801, color: '#FFE381' },
+      { label: 'Other', value: 77, color: '#E7B6F6' },
     ],
-    chartTitle: "Sales Funnel Stages"
+    chartTitle: "Leads"
   },
   {
-    name: "Customer Segments",
+    name: "Leads - by source",
     data: [
-      { label: 'Enterprise', value: 45, color: '#5D001E' },
-      { label: 'SMB', value: 30, color: '#E3AFBC' },
-      { label: 'Startup', value: 15, color: '#EE4C7C' },
-      { label: 'Individual', value: 10, color: '#9C89B8' },
+      { label: 'Blocket', value: 24011, color: '#1F4447' },
+      { label: 'Finance', value: 5199, color: '#2F5D63' },
+      { label: 'OEM', value: 877, color: '#97EA98' },
+      { label: 'Direct', value: 801, color: '#B8FFBA' },
+      { label: 'Other', value: 77, color: '#EEC843' },
     ],
-    chartTitle: "Customer Segments"
+    chartTitle: "Leads"
   },
   {
-    name: "Marketing Channels",
+    name: "Calls - by quality",
     data: [
-      { label: 'Social Media', value: 35, color: '#114B5F' },
-      { label: 'SEO', value: 25, color: '#1A936F' },
-      { label: 'PPC', value: 20, color: '#88D498' },
-      { label: 'Email', value: 15, color: '#C6DABF' },
-      { label: 'Referral', value: 5, color: '#F3E9D2' },
+      { label: 'Qualified', value: 30, color: '#335797' },
+      { label: 'Unqualified', value: 25, color: '#94BAFA' },
+      { label: 'Dropped', value: 20, color: '#97EA98' },
+      { label: 'Missed', value: 15, color: '#E87C69' },
     ],
-    chartTitle: "Marketing Channel Performance"
+    chartTitle: "Calls"
   },
   {
-    name: "Product Usage",
+    name: "Leads - by channel",
     data: [
-      { label: 'Feature A', value: 40, color: '#540D6E' },
-      { label: 'Feature B', value: 30, color: '#EE4266' },
-      { label: 'Feature C', value: 20, color: '#FFD23F' },
-      { label: 'Feature D', value: 10, color: '#3BCEAC' },
+      { label: 'Calls', value: 30, color: '#1F4447' },
+      { label: 'Forms', value: 25, color: '#2F5D63' },
+      { label: 'Emails', value: 20, color: '#97EA98' },
+      { label: 'WhatsApp', value: 15, color: '#B8FFBA' },
+      { label: 'Other', value: 10, color: '#E7B6F6' },
     ],
-    chartTitle: "Product Feature Usage"
+    chartTitle: "Leads"
+  },
+  {
+    name: "Core audiences",
+    data: [
+      { label: 'Comparison buyers', value: 8199, color: '#2EBFAE' },
+      { label: 'Returning buyers', value: 2818, color: '#314C8A' },
+      { label: 'One-shot buyers', value: 994, color: '#E4AEF2' },
+    ],
+    chartTitle: "Leads"
   },
 ];
 
