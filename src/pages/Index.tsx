@@ -10,6 +10,7 @@ const Index = () => {
     { label: 'Chats', value: 20, color: '#B8FFBA' },
     { label: 'Other', value: 12, color: '#E7B6F6' },
   ]);
+  const [numBlocks, setNumBlocks] = useState(5);
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -23,12 +24,44 @@ const Index = () => {
     setLeadData(newLeadData);
   };
 
+  const handleNumBlocksChange = (newNumBlocks: number) => {
+    const validNumBlocks = Math.max(3, Math.min(5, newNumBlocks));
+    setNumBlocks(validNumBlocks);
+    
+    // Adjust leadData based on the new number of blocks
+    if (validNumBlocks < leadData.length) {
+      // Remove blocks from the middle, keeping first and last
+      const newLeadData = [
+        leadData[0],
+        ...leadData.slice(1, -1).slice(0, validNumBlocks - 2),
+        leadData[leadData.length - 1]
+      ];
+      setLeadData(newLeadData);
+    } else if (validNumBlocks > leadData.length) {
+      // Add new blocks with default values
+      const newBlocks = Array(validNumBlocks - leadData.length).fill(0).map(() => ({
+        label: 'New',
+        value: 0,
+        color: '#' + Math.floor(Math.random()*16777215).toString(16) // Random color
+      }));
+      const newLeadData = [
+        leadData[0],
+        ...leadData.slice(1, -1),
+        ...newBlocks,
+        leadData[leadData.length - 1]
+      ];
+      setLeadData(newLeadData);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8">
-      <LeadsChart totalLeads={totalLeads} leadData={leadData} />
+      <LeadsChart totalLeads={totalLeads} leadData={leadData.slice(0, numBlocks)} />
       <LeadDataForm
-        leadData={leadData}
+        leadData={leadData.slice(0, numBlocks)}
         onInputChange={handleInputChange}
+        numBlocks={numBlocks}
+        onNumBlocksChange={handleNumBlocksChange}
       />
     </div>
   );
