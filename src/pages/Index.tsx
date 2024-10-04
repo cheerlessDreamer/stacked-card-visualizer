@@ -3,9 +3,11 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit } from 'lucide-react';
+import { Edit, Palette } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
+const backgroundColors = ['#2F5D63', '#3A7D7B', '#4B9D8F', '#5CBAA2', '#6ED7B5'];
 
 const Index = () => {
   const [leadData, setLeadData] = useState([
@@ -21,6 +23,8 @@ const Index = () => {
   const [chartHeight, setChartHeight] = useState("24px");
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
+
+  const [backgroundColor, setBackgroundColor] = useState(backgroundColors[0]);
 
   const handleInputChange = (index: number, field: 'label' | 'value' | 'color', value: string) => {
     const newLeadData = [...leadData];
@@ -74,7 +78,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 space-y-8 relative" style={{ backgroundColor }}>
       <LeadsChart 
         totalLeads={totalLeads} 
         leadData={leadData.slice(0, numBlocks)} 
@@ -85,7 +89,7 @@ const Index = () => {
       
       <Drawer>
         <DrawerTrigger asChild>
-          <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
+          <Button className="fixed bottom-4 right-20 rounded-full w-16 h-16 shadow-lg">
             <Edit className="w-6 h-6" />
           </Button>
         </DrawerTrigger>
@@ -107,6 +111,26 @@ const Index = () => {
           </div>
         </DrawerContent>
       </Drawer>
+
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
+            <Palette className="w-6 h-6" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-64">
+          <div className="grid grid-cols-5 gap-2">
+            {backgroundColors.map((color, index) => (
+              <Button
+                key={index}
+                className="w-10 h-10 rounded-full"
+                style={{ backgroundColor: color }}
+                onClick={() => setBackgroundColor(color)}
+              />
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
