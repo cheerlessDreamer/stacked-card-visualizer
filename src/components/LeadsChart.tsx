@@ -166,7 +166,7 @@ const LeadsChart = () => {
   }, []);
 
   return (
-    <Card className="w-full max-w-3xl mx-auto p-8">
+    <Card className="w-full max-w-3xl mx-auto p-8 rounded-2xl"> {/* Updated this line */}
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-2xl font-normal">All channels</CardTitle>
         <div className="flex items-center space-x-2">
