@@ -110,10 +110,14 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
     }
   };
 
-  const handleDimensionChange = (e: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) => {
+  const handleDimensionChange = (e: React.ChangeEvent<HTMLInputElement>, dimensionType: 'width' | 'height') => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
-      setter(value ? `${value}px` : '');
+      if (dimensionType === 'width') {
+        onCardWidthChange(value ? `${value}px` : '');
+      } else {
+        onCardHeightChange(value ? `${value}px` : '');
+      }
     }
   };
 
@@ -151,7 +155,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           <Input
             id="card-width"
             value={cardWidth.replace('px', '')}
-            onChange={(e) => handleDimensionChange(e, onCardWidthChange)}
+            onChange={(e) => handleDimensionChange(e, 'width')}
             className="w-full"
             placeholder="e.g., 768"
             type="text"
@@ -164,7 +168,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           <Input
             id="card-height"
             value={cardHeight.replace('px', '')}
-            onChange={(e) => handleDimensionChange(e, onCardHeightChange)}
+            onChange={(e) => handleDimensionChange(e, 'height')}
             className="w-full"
             placeholder="e.g., 600"
             type="text"

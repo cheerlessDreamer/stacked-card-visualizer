@@ -18,7 +18,7 @@ const Index = () => {
   const [numBlocks, setNumBlocks] = useState(5);
   const [chartTitle, setChartTitle] = useState("Lead Sources");
   const [cardWidth, setCardWidth] = useState("768px");
-  const [cardHeight, setCardHeight] = useState("600px");
+  const [cardHeight, setCardHeight] = useState("650px"); // Changed from "600px" to "650px"
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 

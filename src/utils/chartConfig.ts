@@ -31,7 +31,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
       maintainAspectRatio: false,
       layout: {
         padding: {
-          bottom: 16 // Add padding to the bottom of the chart
+          bottom: 20 // Add bottom padding to the chart
         }
       },
       scales: {
@@ -95,7 +95,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           ul.style.justifyContent = 'flex-start';
           ul.style.gap = '16px';
           ul.style.padding = '0';
-          ul.style.margin = '0'; // Remove the negative margin
+          ul.style.margin = '16px 0 0 0'; // Removed negative bottom margin
           ul.style.listStyle = 'none';
 
           items.forEach(item => {

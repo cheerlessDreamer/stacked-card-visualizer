@@ -8,7 +8,7 @@ interface LeadsChartProps {
   leadData: { label: string; value: number; color: string }[];
   chartTitle: string;
   cardWidth: string;
-  cardHeight: string; // New prop
+  cardHeight: string;
 }
 
 const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitle, cardWidth, cardHeight }) => {
@@ -37,9 +37,9 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const cardStyle = {
     width: cardWidth || '100%',
-    height: cardHeight || 'auto',
+    height: cardHeight || '650px',
     maxWidth: '100%',
-    minHeight: '400px', // Set a minimum height
+    minHeight: '400px',
   };
 
   return (
@@ -47,12 +47,12 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
-      <CardContent className="flex flex-col flex-grow pt-1">
+      <CardContent className="flex flex-col flex-grow pt-1 pb-6"> {/* Increased bottom padding */}
         <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
         </div>
-        <ul id="chart-legend" className="mt-4 flex-shrink-0 justify-start"></ul>
+        <ul id="chart-legend" className="mt-6 flex-shrink-0 justify-start"></ul>
       </CardContent>
     </Card>
   );
