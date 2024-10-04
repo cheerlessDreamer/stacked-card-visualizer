@@ -3,7 +3,7 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit, Copy } from 'lucide-react';
+import { Edit, Download } from 'lucide-react';
 import domtoimage from 'dom-to-image';
 import { toast } from 'sonner';
 
@@ -77,18 +77,18 @@ const Index = () => {
     setChartHeight(newHeight);
   };
 
-  const copyCardAsImage = async () => {
+  const saveCardAsImage = async () => {
     if (chartRef.current) {
       try {
         const dataUrl = await domtoimage.toPng(chartRef.current);
-        const img = new Image();
-        img.src = dataUrl;
-        const item = new ClipboardItem({ "image/png": await (await fetch(dataUrl)).blob() });
-        await navigator.clipboard.write([item]);
-        toast.success('Chart copied to clipboard!');
+        const link = document.createElement('a');
+        link.download = 'lead-sources-chart.png';
+        link.href = dataUrl;
+        link.click();
+        toast.success('Chart saved as image!');
       } catch (error) {
-        console.error('Error copying chart:', error);
-        toast.error('Failed to copy chart. Please try again.');
+        console.error('Error saving chart:', error);
+        toast.error('Failed to save chart. Please try again.');
       }
     }
   };
@@ -106,10 +106,10 @@ const Index = () => {
       </div>
       
       <Button
-        onClick={copyCardAsImage}
+        onClick={saveCardAsImage}
         className="fixed bottom-24 right-4 rounded-full w-16 h-16 shadow-lg bg-white text-[#2F5D63]"
       >
-        <Copy className="w-6 h-6" />
+        <Download className="w-6 h-6" />
       </Button>
 
       <Drawer>
