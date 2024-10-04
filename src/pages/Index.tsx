@@ -4,6 +4,7 @@ import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Plus } from 'lucide-react';
+import EditableTitle from '../components/EditableTitle';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -16,6 +17,7 @@ const Index = () => {
     { label: 'Other', value: 12, color: defaultColors[4] },
   ]);
   const [numBlocks, setNumBlocks] = useState(5);
+  const [chartTitle, setChartTitle] = useState("Lead Sources");
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -58,8 +60,15 @@ const Index = () => {
     }
   };
 
+  const handleTemplateChange = (template: { data: typeof leadData; chartTitle: string }) => {
+    setLeadData(template.data);
+    setNumBlocks(template.data.length);
+    setChartTitle(template.chartTitle);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
+      <EditableTitle title={chartTitle} onTitleChange={setChartTitle} />
       <LeadsChart totalLeads={totalLeads} leadData={leadData.slice(0, numBlocks)} />
       
       <Drawer>
@@ -75,6 +84,7 @@ const Index = () => {
               onInputChange={handleInputChange}
               numBlocks={numBlocks}
               onNumBlocksChange={handleNumBlocksChange}
+              onTemplateChange={handleTemplateChange}
             />
           </div>
         </DrawerContent>
