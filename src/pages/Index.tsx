@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit } from 'lucide-react';
+import { Edit, Copy } from 'lucide-react';
+import domtoimage from 'dom-to-image';
+import { toast } from 'sonner';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -19,6 +21,8 @@ const Index = () => {
   const [chartTitle, setChartTitle] = useState("Lead Sources");
   const [cardWidth, setCardWidth] = useState("768px");
   const [chartHeight, setChartHeight] = useState("24px");
+
+  const chartRef = useRef<HTMLDivElement>(null);
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
@@ -73,16 +77,41 @@ const Index = () => {
     setChartHeight(newHeight);
   };
 
+  const copyCardAsImage = async () => {
+    if (chartRef.current) {
+      try {
+        const dataUrl = await domtoimage.toPng(chartRef.current);
+        const img = new Image();
+        img.src = dataUrl;
+        const item = new ClipboardItem({ "image/png": await (await fetch(dataUrl)).blob() });
+        await navigator.clipboard.write([item]);
+        toast.success('Chart copied to clipboard!');
+      } catch (error) {
+        console.error('Error copying chart:', error);
+        toast.error('Failed to copy chart. Please try again.');
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <LeadsChart 
-        totalLeads={totalLeads} 
-        leadData={leadData.slice(0, numBlocks)} 
-        chartTitle={chartTitle}
-        cardWidth={cardWidth}
-        chartHeight={chartHeight}
-      />
+      <div ref={chartRef}>
+        <LeadsChart 
+          totalLeads={totalLeads} 
+          leadData={leadData.slice(0, numBlocks)} 
+          chartTitle={chartTitle}
+          cardWidth={cardWidth}
+          chartHeight={chartHeight}
+        />
+      </div>
       
+      <Button
+        onClick={copyCardAsImage}
+        className="fixed bottom-24 right-4 rounded-full w-16 h-16 shadow-lg bg-white text-[#2F5D63]"
+      >
+        <Copy className="w-6 h-6" />
+      </Button>
+
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
