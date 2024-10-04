@@ -52,7 +52,7 @@ const templates: LeadDataTemplate[] = [
       { label: 'Finance', value: 5199, color: '#2F5D63' },
       { label: 'OEM', value: 877, color: '#97EA98' },
       { label: 'Direct', value: 801, color: '#B8FFBA' },
-      { label: 'Other', value: 77, color: '#EEC843' },
+      { label: 'Other', value: 231, color: '#EEC843' },  // Changed from 77 to 231
     ],
     chartTitle: "Leads by Source"
   },
