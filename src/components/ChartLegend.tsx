@@ -49,6 +49,8 @@ export const renderChartLegend = (chart, percentages) => {
       circleSpan.style.borderRadius = '50%';
       circleSpan.style.marginRight = '8px';
       circleSpan.style.marginTop = '4px';
+      // Add black outline to the circle
+      circleSpan.style.boxShadow = '0 0 0 1px black';
 
       // Text
       const textContainer = document.createElement('p');
