@@ -3,7 +3,7 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Plus } from 'lucide-react';
+import { Edit } from 'lucide-react';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -77,7 +77,7 @@ const Index = () => {
       <Drawer>
         <DrawerTrigger asChild>
           <Button className="fixed bottom-4 right-4 rounded-full w-16 h-16 shadow-lg">
-            <Plus className="w-6 h-6" />
+            <Edit className="w-6 h-6" />
           </Button>
         </DrawerTrigger>
         <DrawerContent>
