@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Chart from 'chart.js/auto';
-import { createChartData, getBackgroundColor, getBorderColor, getLighterColor } from '../utils/chartUtils';
+import { createChartData, getLighterColor } from '../utils/chartUtils';
 
 interface LeadsChartProps {
   totalLeads: number;
-  leadData: { label: string; value: number }[];
+  leadData: { label: string; value: number; color: string }[];
 }
 
 const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
@@ -33,18 +33,18 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData }) => {
           type: 'bar',
           data: {
             labels: [''],
-            datasets: percentages.map((item, index) => ({
+            datasets: percentages.map((item) => ({
               label: item.label,
               data: [item.percentage],
-              backgroundColor: getBackgroundColor(item.label),
-              hoverBackgroundColor: getLighterColor(getBackgroundColor(item.label) || '#2F5D63', 15),
-              borderColor: getBorderColor(item.label),
+              backgroundColor: item.color,
+              hoverBackgroundColor: getLighterColor(item.color, 15),
+              borderColor: item.color,
               borderWidth: 0,
               borderRadius: {
-                topLeft: index === 0 ? 8 : 0,
-                topRight: index === percentages.length - 1 ? 8 : 0,
-                bottomLeft: index === 0 ? 8 : 0,
-                bottomRight: index === percentages.length - 1 ? 8 : 0
+                topLeft: 8,
+                topRight: 8,
+                bottomLeft: 8,
+                bottomRight: 8
               },
               borderSkipped: false
             }))

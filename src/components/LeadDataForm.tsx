@@ -3,8 +3,8 @@ import { Input } from "@/components/ui/input";
 import { Pencil } from 'lucide-react';
 
 interface LeadDataFormProps {
-  leadData: { label: string; value: number }[];
-  onInputChange: (index: number, field: 'label' | 'value', value: string) => void;
+  leadData: { label: string; value: number; color: string }[];
+  onInputChange: (index: number, field: 'label' | 'value' | 'color', value: string) => void;
 }
 
 const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange }) => {
@@ -13,7 +13,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange }) 
   return (
     <div className="mt-8 bg-white p-6 rounded-xl shadow-md">
       <h3 className="text-lg font-semibold mb-4">Update Lead Data</h3>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         {leadData.map((item, index) => (
           <div key={index} className="flex items-center space-x-2">
             <div 
@@ -41,6 +41,12 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange }) 
               value={item.value}
               onChange={(e) => onInputChange(index, 'value', e.target.value)}
               className="w-24"
+            />
+            <Input
+              type="color"
+              value={item.color}
+              onChange={(e) => onInputChange(index, 'color', e.target.value)}
+              className="w-12 h-8 p-0 cursor-pointer"
             />
           </div>
         ))}

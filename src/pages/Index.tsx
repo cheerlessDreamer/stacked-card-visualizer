@@ -4,16 +4,16 @@ import LeadDataForm from '../components/LeadDataForm';
 
 const Index = () => {
   const [leadData, setLeadData] = useState([
-    { label: 'Calls', value: 80 },
-    { label: 'Forms', value: 50 },
-    { label: 'Emails', value: 30 },
-    { label: 'Chats', value: 20 },
-    { label: 'Other', value: 12 },
+    { label: 'Calls', value: 80, color: '#1F4447' },
+    { label: 'Forms', value: 50, color: '#2F5D63' },
+    { label: 'Emails', value: 30, color: '#97EA98' },
+    { label: 'Chats', value: 20, color: '#B8FFBA' },
+    { label: 'Other', value: 12, color: '#E7B6F6' },
   ]);
 
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
-  const handleInputChange = (index: number, field: 'label' | 'value', value: string) => {
+  const handleInputChange = (index: number, field: 'label' | 'value' | 'color', value: string) => {
     const newLeadData = [...leadData];
     if (field === 'value') {
       newLeadData[index][field] = parseInt(value) || 0;

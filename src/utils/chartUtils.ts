@@ -1,26 +1,4 @@
-export const getBackgroundColor = (label: string) => {
-  const colors = {
-    'Calls': '#1F4447',
-    'Forms': '#2F5D63',
-    'Emails': '#97EA98',
-    'Chats': '#B8FFBA',
-    'Other': '#E7B6F6'
-  };
-  return colors[label] || '#2F5D63';
-};
-
-export const getBorderColor = (label: string) => {
-  const colors = {
-    'Calls': '#1F4447',
-    'Forms': '#2F5D63',
-    'Emails': '#97EA98',
-    'Chats': '#B8FFBA',
-    'Other': '#E7B6F6'
-  };
-  return colors[label] || '#2F5D63';
-};
-
-export const createChartData = (totalLeads: number, leadData: { label: string; value: number }[]) => {
+export const createChartData = (totalLeads: number, leadData: { label: string; value: number; color: string }[]) => {
   return leadData.map(item => ({
     ...item,
     percentage: (item.value / totalLeads) * 100
