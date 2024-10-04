@@ -4,7 +4,6 @@ import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Plus } from 'lucide-react';
-import EditableTitle from '../components/EditableTitle';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 
@@ -68,8 +67,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
-      <EditableTitle title={chartTitle} onTitleChange={setChartTitle} />
-      <LeadsChart totalLeads={totalLeads} leadData={leadData.slice(0, numBlocks)} />
+      <LeadsChart 
+        totalLeads={totalLeads} 
+        leadData={leadData.slice(0, numBlocks)} 
+        chartTitle={chartTitle}
+        onTitleChange={setChartTitle}
+      />
       
       <Drawer>
         <DrawerTrigger asChild>
