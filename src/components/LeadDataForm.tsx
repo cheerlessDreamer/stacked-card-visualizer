@@ -3,6 +3,8 @@ import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { TemplateSelector } from './TemplateSelector';
+import { ChartHeightSelector } from './ChartHeightSelector';
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number; color: string }[];
@@ -14,6 +16,8 @@ interface LeadDataFormProps {
   onChartTitleChange: (newTitle: string) => void;
   cardWidth: string;
   onCardWidthChange: (newWidth: string) => void;
+  chartHeight: string;
+  onChartHeightChange: (newHeight: string) => void;
 }
 
 interface LeadDataTemplate {
@@ -21,72 +25,6 @@ interface LeadDataTemplate {
   data: { label: string; value: number; color: string }[];
   chartTitle: string;
 }
-
-const templates: LeadDataTemplate[] = [
-  {
-    name: "Leads - alternative colours",
-    data: [
-      { label: 'Calls', value: 30, color: '#1FE6CE' },
-      { label: 'Forms', value: 25, color: '#335797' },
-      { label: 'Emails', value: 20, color: '#587DBD' },
-      { label: 'WhatsApp', value: 15, color: '#94BAFA' },
-      { label: 'Other', value: 10, color: '#E7B6F6' },
-    ],
-    chartTitle: "Lead Sources"
-  },
-  {
-    name: "Leads - by assignee",
-    data: [
-      { label: 'Johan', value: 212, color: '#2FC9B7' },
-      { label: 'Stefan', value: 200, color: '#32D7C3' },
-      { label: 'Anna', value: 145, color: '#EEC843' },
-      { label: 'Anders', value: 99, color: '#FFE381' },
-      { label: 'Jörgen', value: 61, color: '#E7B6F6' },
-    ],
-    chartTitle: "Leads by Assignee"
-  },
-  {
-    name: "Leads - by source",
-    data: [
-      { label: 'Blocket', value: 8901, color: '#1F4447' },  // Changed from 16414 to 8901
-      { label: 'Finance', value: 5199, color: '#2F5D63' },
-      { label: 'OEM', value: 877, color: '#97EA98' },
-      { label: 'Direct', value: 801, color: '#B8FFBA' },
-      { label: 'Other', value: 404, color: '#EEC843' },  // Changed from 231 to 404
-    ],
-    chartTitle: "Leads by Source"
-  },
-  {
-    name: "Calls - by quality",
-    data: [
-      { label: 'Qualified', value: 30, color: '#335797' },
-      { label: 'Unqualified', value: 25, color: '#94BAFA' },
-      { label: 'Dropped', value: 20, color: '#EEC843' },
-      { label: 'Missed', value: 15, color: '#E87C69' },
-    ],
-    chartTitle: "Calls by Quality"
-  },
-  {
-    name: "Leads - by channel",
-    data: [
-      { label: 'Calls', value: 30, color: '#1F4447' },
-      { label: 'Forms', value: 25, color: '#2F5D63' },
-      { label: 'Emails', value: 20, color: '#97EA98' },
-      { label: 'WhatsApp', value: 15, color: '#B8FFBA' },
-      { label: 'Other', value: 10, color: '#E7B6F6' },
-    ],
-    chartTitle: "Leads by Channel"
-  },
-  {
-    name: "Core audiences",
-    data: [
-      { label: 'Comparison buyers', value: 8199, color: '#2EBFAE' },
-      { label: 'Returning buyers', value: 2818, color: '#314C8A' },
-      { label: 'One-shot buyers', value: 994, color: '#E4AEF2' },
-    ],
-    chartTitle: "Core Audiences"
-  },
-];
 
 const LeadDataForm: React.FC<LeadDataFormProps> = ({ 
   leadData, 
@@ -97,15 +35,10 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
   chartTitle,
   onChartTitleChange,
   cardWidth,
-  onCardWidthChange
+  onCardWidthChange,
+  chartHeight,
+  onChartHeightChange
 }) => {
-  const handleTemplateChange = (templateName: string) => {
-    const selectedTemplate = templates.find(t => t.name === templateName);
-    if (selectedTemplate) {
-      onTemplateChange(selectedTemplate);
-    }
-  };
-
   const handleCardWidthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*$/.test(value)) {
@@ -115,20 +48,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
 
   return (
     <div className="mt-4 relative pb-16">
-      <div className="absolute top-0 right-0 w-48">
-        <Select onValueChange={handleTemplateChange}>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose a template" />
-          </SelectTrigger>
-          <SelectContent>
-            {templates.map((template) => (
-              <SelectItem key={template.name} value={template.name}>
-                {template.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <TemplateSelector onTemplateChange={onTemplateChange} />
       
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
       <div className="mb-4">
@@ -154,6 +74,8 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           pattern="\d*"
         />
       </div>
+
+      <ChartHeightSelector chartHeight={chartHeight} onChartHeightChange={onChartHeightChange} />
 
       <div className="mb-4">
         <Label className="block text-sm font-medium text-gray-700 mb-2">Number of Blocks:</Label>
