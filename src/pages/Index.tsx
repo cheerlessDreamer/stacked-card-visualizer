@@ -85,7 +85,7 @@ const Index = () => {
         
         const dataUrl = await domtoimage.toPng(chartRef.current, {
           quality: 0.95,
-          bgcolor: '#fff'
+          bgcolor: 'rgba(0,0,0,0)'  // Set transparent background
         });
         
         const link = document.createElement('a');
