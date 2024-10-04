@@ -90,7 +90,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
 
           ul.style.display = 'flex';
           ul.style.flexWrap = 'wrap';
-          ul.style.justifyContent = 'flex-start'; // Changed from 'center' to 'flex-start'
+          ul.style.justifyContent = 'flex-start';
           ul.style.gap = '16px';
           ul.style.padding = '0';
           ul.style.margin = '16px 0 0 0';
@@ -99,7 +99,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           items.forEach(item => {
             const li = document.createElement('li');
             li.style.display = 'flex';
-            li.style.alignItems = 'flex-start'; // Changed from 'center' to 'flex-start'
+            li.style.alignItems = 'flex-start';
             li.style.cursor = 'pointer';
             li.style.marginBottom = '8px';
 
@@ -114,11 +114,11 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
             circleSpan.style.borderColor = item.strokeStyle;
             circleSpan.style.borderWidth = item.lineWidth + 'px';
             circleSpan.style.display = 'inline-block';
-            circleSpan.style.width = '12px';
-            circleSpan.style.height = '12px';
+            circleSpan.style.width = '10px'; // Changed from 12px to 10px
+            circleSpan.style.height = '10px'; // Changed from 12px to 10px
             circleSpan.style.borderRadius = '50%';
             circleSpan.style.marginRight = '8px';
-            circleSpan.style.marginTop = '4px'; // Added to align with the first line of text
+            circleSpan.style.marginTop = '4px';
 
             // Text container
             const textContainer = document.createElement('div');
