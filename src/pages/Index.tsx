@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Plus } from 'lucide-react';
 
 const Index = () => {
   const [leadData, setLeadData] = useState([
@@ -55,14 +58,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#2F5D63] p-4 space-y-8 relative">
       <LeadsChart totalLeads={totalLeads} leadData={leadData.slice(0, numBlocks)} />
-      <LeadDataForm
-        leadData={leadData.slice(0, numBlocks)}
-        onInputChange={handleInputChange}
-        numBlocks={numBlocks}
-        onNumBlocksChange={handleNumBlocksChange}
-      />
+      
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="fixed bottom-8 right-8 rounded-full w-16 h-16 shadow-lg">
+            <Plus className="w-8 h-8" />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <LeadDataForm
+            leadData={leadData.slice(0, numBlocks)}
+            onInputChange={handleInputChange}
+            numBlocks={numBlocks}
+            onNumBlocksChange={handleNumBlocksChange}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

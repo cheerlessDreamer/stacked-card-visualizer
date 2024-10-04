@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Pencil } from 'lucide-react';
+import { DialogTitle, DialogHeader } from "@/components/ui/dialog";
 
 interface LeadDataFormProps {
   leadData: { label: string; value: number; color: string }[];
@@ -13,9 +14,11 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, nu
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   return (
-    <div className="mt-8 bg-white p-6 rounded-xl shadow-md">
-      <h3 className="text-lg font-semibold mb-4">Update Lead Data</h3>
-      <div className="mb-4">
+    <div>
+      <DialogHeader>
+        <DialogTitle>Update Data</DialogTitle>
+      </DialogHeader>
+      <div className="mt-4">
         <label htmlFor="numBlocks" className="block text-sm font-medium text-gray-700">Number of Blocks:</label>
         <Input
           id="numBlocks"
@@ -27,7 +30,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({ leadData, onInputChange, nu
           className="mt-1 block w-full"
         />
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 mt-4">
         {leadData.map((item, index) => (
           <div key={index} className="flex items-center space-x-2">
             <div 
