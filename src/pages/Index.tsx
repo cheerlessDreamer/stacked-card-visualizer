@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Edit, Palette } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Input } from "@/components/ui/input";
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
-const backgroundColors = ['#F9F6F0', '#1F4447', '#F7F1E5', '#2F5D63', 'custom'];
+const backgroundColors = ['#F9F6F0', '#1F4447', '#F7F1E5', '#2F5D63', 'white', '#E7B6F6', '#B1F2B3'];
 
 const Index = () => {
   const [leadData, setLeadData] = useState([
@@ -26,7 +25,6 @@ const Index = () => {
   const totalLeads = leadData.reduce((sum, item) => sum + item.value, 0);
 
   const [backgroundColor, setBackgroundColor] = useState(backgroundColors[0]);
-  const [customColor, setCustomColor] = useState('#FFFFFF');
 
   const handleInputChange = (index: number, field: 'label' | 'value' | 'color', value: string) => {
     const newLeadData = [...leadData];
@@ -80,16 +78,7 @@ const Index = () => {
   };
 
   const handleBackgroundColorChange = (color: string) => {
-    if (color === 'custom') {
-      setBackgroundColor(customColor);
-    } else {
-      setBackgroundColor(color);
-    }
-  };
-
-  const handleCustomColorChange = (newColor: string) => {
-    setCustomColor(newColor);
-    setBackgroundColor(newColor);
+    setBackgroundColor(color);
   };
 
   return (
@@ -134,23 +123,15 @@ const Index = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-64">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {backgroundColors.map((color, index) => (
               <Button
                 key={index}
-                className={`w-10 h-10 rounded-full ${color === 'custom' ? 'border-2 border-black' : ''}`}
-                style={{ backgroundColor: color === 'custom' ? customColor : color }}
+                className="w-10 h-10 rounded-full"
+                style={{ backgroundColor: color }}
                 onClick={() => handleBackgroundColorChange(color)}
               />
             ))}
-          </div>
-          <div className="mt-2">
-            <Input
-              type="color"
-              value={customColor}
-              onChange={(e) => handleCustomColorChange(e.target.value)}
-              className="w-full h-10"
-            />
           </div>
         </PopoverContent>
       </Popover>
