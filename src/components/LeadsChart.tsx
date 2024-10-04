@@ -37,7 +37,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
 
   const cardStyle = {
     width: cardWidth || '100%',
-    height: cardHeight || '650px', // Changed from '600px' to '650px'
+    height: cardHeight || '650px',
     maxWidth: '100%',
     minHeight: '400px',
   };
@@ -47,7 +47,7 @@ const LeadsChart: React.FC<LeadsChartProps> = ({ totalLeads, leadData, chartTitl
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
         <h2 className="text-2xl font-normal">{chartTitle}</h2>
       </CardHeader>
-      <CardContent className="flex flex-col flex-grow pt-1">
+      <CardContent className="flex flex-col flex-grow pt-1 pb-6"> {/* Increased bottom padding */}
         <div className="text-5xl font-extralight mb-5">{totalLeads.toLocaleString()}</div>
         <div className="flex-grow relative">
           <canvas ref={chartRef}></canvas>
