@@ -17,6 +17,7 @@ const FeedbackForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <p className="text-sm text-gray-600 mb-4">Questions? Feedback? Want to whinge about this free tool? Hit me up below:</p>
       <div>
         <Label htmlFor="name">Name</Label>
         <Input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
