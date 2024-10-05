@@ -51,19 +51,7 @@ export const createChartConfig = (totalLeads: number, leadData: { label: string;
           display: false
         },
         tooltip: {
-          callbacks: {
-            label: function(context) {
-              let label = context.dataset.label || '';
-              if (label) {
-                label += ': ';
-              }
-              if (context.parsed.x !== null) {
-                const value = percentages.find(item => item.label === context.dataset.label)?.value;
-                label += value ? value.toLocaleString() : '';
-              }
-              return label;
-            }
-          }
+          enabled: false // Disable tooltips
         }
       }
     },
