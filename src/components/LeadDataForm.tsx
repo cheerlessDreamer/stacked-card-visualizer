@@ -91,32 +91,31 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           ))}
         </RadioGroup>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-4">
         {leadData.map((item, index) => (
-          <div key={index} className="space-y-2">
-            <Label htmlFor={`label-${index}`} className="block text-sm font-medium text-gray-700">Title:</Label>
+          <div key={index} className="flex items-center space-x-2">
             <Input
               id={`label-${index}`}
               type="text"
               value={item.label}
               onChange={(e) => onInputChange(index, 'label', e.target.value)}
-              className="w-full"
+              className="w-1/2"
+              placeholder="Title"
             />
-            <Label htmlFor={`value-${index}`} className="block text-sm font-medium text-gray-700">Number:</Label>
             <Input
               id={`value-${index}`}
               type="number"
               value={item.value}
               onChange={(e) => onInputChange(index, 'value', e.target.value)}
-              className="w-full"
+              className="w-1/4"
+              placeholder="Number"
             />
-            <Label htmlFor={`color-${index}`} className="block text-sm font-medium text-gray-700">Color:</Label>
             <Input
               id={`color-${index}`}
               type="color"
               value={item.color}
               onChange={(e) => onInputChange(index, 'color', e.target.value)}
-              className="w-full h-10 p-1 cursor-pointer"
+              className="w-12 h-10 p-1 cursor-pointer"
             />
           </div>
         ))}
