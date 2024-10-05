@@ -152,7 +152,7 @@ const Index = () => {
               <HelpCircle className="w-6 h-6" />
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[600px]"> {/* Updated width here */}
+          <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
               <DialogTitle>Kaisa Chart Creator Help</DialogTitle>
               <DialogDescription>
@@ -171,6 +171,13 @@ const Index = () => {
               
               <div className="mt-6">
                 <ProTip />
+              </div>
+
+              <div className="mt-6 p-4 bg-yellow-100 rounded-md">
+                <h4 className="font-semibold text-yellow-800 mb-2">Warning: Image Download Unavailable</h4>
+                <p className="text-yellow-700">
+                  We attempted to implement a feature for downloading the chart as an image, but it proved more challenging than anticipated. Currently, this functionality is not available. We recommend using your device's screenshot feature to capture the chart instead.
+                </p>
               </div>
             </div>
           </DialogContent>
