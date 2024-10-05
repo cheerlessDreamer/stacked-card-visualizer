@@ -11,7 +11,7 @@ const FeedbackForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const mailtoLink = `mailto:your-email@example.com?subject=Feedback from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage: ${message}`)}`;
+    const mailtoLink = `mailto:danny.taylor@kaisa.io?subject=Feedback from ${name}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage: ${message}`)}`;
     window.location.href = mailtoLink;
   };
 
