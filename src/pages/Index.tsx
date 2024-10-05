@@ -101,14 +101,14 @@ const Index = () => {
       />
     
       <div className="fixed bottom-4 right-4 flex flex-col space-y-4">
-        <Drawer>
+        <Drawer direction="left">
           <DrawerTrigger asChild>
             <Button className="rounded-full w-16 h-16 shadow-lg">
               <Edit className="w-6 h-6" />
             </Button>
           </DrawerTrigger>
-          <DrawerContent>
-            <div className="p-6 bg-white rounded-t-xl">
+          <DrawerContent side="left" className="w-[400px] sm:w-[540px] h-full">
+            <div className="h-full p-6 bg-white">
               <LeadDataForm
                 leadData={leadData.slice(0, numBlocks)}
                 onInputChange={handleInputChange}
