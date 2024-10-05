@@ -3,7 +3,7 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit, Palette, HelpCircle, AlertTriangle } from 'lucide-react';
+import { Edit, Palette, HelpCircle, AlertTriangle, MessageSquare } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Dialog,
@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import ProTip from '../components/ProTip';
+import FeedbackForm from '../components/FeedbackForm';
 
 const defaultColors = ['#1F4447', '#2F5D63', '#97EA98', '#B8FFBA', '#E7B6F6'];
 const backgroundColors = ['#F9F6F0', '#1F4447', '#F7F1E5', '#2F5D63', 'white', '#E7B6F6', '#B1F2B3'];
@@ -183,6 +184,23 @@ const Index = () => {
                 </p>
               </div>
             </div>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="rounded-full w-16 h-16 shadow-lg">
+              <MessageSquare className="w-6 h-6" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Send Feedback</DialogTitle>
+              <DialogDescription>
+                We'd love to hear your thoughts on the Kaisa Chart Creator!
+              </DialogDescription>
+            </DialogHeader>
+            <FeedbackForm />
           </DialogContent>
         </Dialog>
       </div>
