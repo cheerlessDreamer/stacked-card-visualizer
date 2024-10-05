@@ -3,7 +3,7 @@ import LeadsChart from '../components/LeadsChart';
 import LeadDataForm from '../components/LeadDataForm';
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Edit, Palette, HelpCircle } from 'lucide-react';
+import { Edit, Palette, HelpCircle, AlertTriangle } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Dialog,
@@ -99,7 +99,7 @@ const Index = () => {
         cardWidth={cardWidth}
         chartHeight={chartHeight}
       />
-    
+      
       <div className="fixed bottom-4 right-4 flex flex-col space-y-4">
         <Drawer direction="left">
           <DrawerTrigger asChild>
@@ -174,9 +174,12 @@ const Index = () => {
               </div>
 
               <div className="mt-6 p-4 bg-yellow-100 rounded-md">
-                <h4 className="font-semibold text-yellow-800 mb-2">Warning: Image Download Unavailable</h4>
+                <div className="flex items-center mb-2">
+                  <AlertTriangle className="w-6 h-6 text-yellow-600 mr-2" />
+                  <h4 className="font-semibold text-yellow-800">Image Download Unavailable</h4>
+                </div>
                 <p className="text-yellow-700">
-                  We attempted to implement a feature for downloading the chart as an image, but it proved more challenging than anticipated. Currently, this functionality is not available. We recommend using your device's screenshot feature to capture the chart instead.
+                  "Wouldn't it be nice if I could download an image instead of take a screenshot?" Yes, but it proved to be more challenging to implement than anticipated.
                 </p>
               </div>
             </div>
