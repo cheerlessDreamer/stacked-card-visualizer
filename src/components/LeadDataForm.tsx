@@ -50,6 +50,7 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
       <TemplateSelector onTemplateChange={onTemplateChange} />
       
       <h3 className="text-lg font-semibold mb-4">Update Data</h3>
+      
       <div className="mb-4">
         <Label htmlFor="chart-title" className="block text-sm font-medium text-gray-700 mb-2">Chart Title:</Label>
         <Input
@@ -91,6 +92,13 @@ const LeadDataForm: React.FC<LeadDataFormProps> = ({
           ))}
         </RadioGroup>
       </div>
+
+      <div className="mb-2 flex">
+        <Label className="w-1/2 text-sm font-medium text-gray-700">Title</Label>
+        <Label className="w-1/4 text-sm font-medium text-gray-700">Quantity</Label>
+        <Label className="w-1/4 text-sm font-medium text-gray-700">Colour</Label>
+      </div>
+
       <div className="space-y-4">
         {leadData.map((item, index) => (
           <div key={index} className="flex items-center space-x-2">
