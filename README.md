@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# Kaisa Chart Creator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Well, well, well, what do we have here? It's only the bee's knees of chart creation tools for Kaisa staff! This nifty little number helps you whip up spiffing charts for your customer presentations in two shakes of a lamb's tail.
 
-Currently, two official plugins are available:
+## What's all this then?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a React-based web application that allows Kaisa staff to create customized charts for their customer presentations. It's as easy as pie to use and produces results that'll knock your socks off!
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Right, let's get this show on the road! Follow these steps to get the project up and running on your local machine:
 
-- Configure the top-level `parserOptions` property like this:
+1. First things first, make sure you've got Node.js installed on your computer. If you haven't, pop over to [nodejs.org](https://nodejs.org) and sort that out.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. Clone this repository to your local machine:
+   ```
+   git clone https://github.com/your-repo-url/kaisa-chart-creator.git
+   ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+3. Bob's your uncle! Now navigate to the project directory:
+   ```
+   cd kaisa-chart-creator
+   ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+4. Install the dependencies (it might take a few minutes, so maybe put the kettle on):
+   ```
+   npm install
+   ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+5. Once that's done and dusted, start the development server:
+   ```
+   npm run dev
+   ```
+
+6. Bob's your uncle! The application should now be running on [http://localhost:5173](http://localhost:5173). Open this URL in your browser, and you're good to go!
+
+## Usage
+
+Using the Kaisa Chart Creator is a piece of cake:
+
+1. Click the pencil icon to customize your chart data, title, and dimensions.
+2. Use the colour palette icon to change the background colour of the chart area.
+3. Play around with the values, colours, and layout until your chart looks the dog's bollocks.
+4. When you're chuffed with the result, take a screenshot (the app will give you a handy tip on how to do this).
+
+And there you have it! You'll be creating charts that'll make your colleagues green with envy in no time at all. Cheerio!
