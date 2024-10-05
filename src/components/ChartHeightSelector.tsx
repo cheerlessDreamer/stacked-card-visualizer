@@ -12,7 +12,7 @@ export const ChartHeightSelector: React.FC<ChartHeightSelectorProps> = ({ chartH
     { label: 'Small', value: '24px' },
     { label: 'Medium', value: '80px' },
     { label: 'Large', value: '240px' },
-    { label: 'Sassy', value: '400px' },
+    { label: 'Size queen', value: '400px' }, // Changed 'Sassy' to 'Size queen'
   ];
 
   return (
