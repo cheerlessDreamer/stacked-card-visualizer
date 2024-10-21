@@ -18,5 +18,6 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
+//TODO: Add a 404 page
 
 export default App;
