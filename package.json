@@ -3,7 +3,7 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
-    "homepage": "http://cheerlessdreamer.github.io/stacked-card-visualizer",
+    "homepage": ".",
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
