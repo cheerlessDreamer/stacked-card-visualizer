@@ -3,6 +3,7 @@
     "private": true,
     "version": "0.0.0",
     "type": "module",
+    "homepage": "http://cheerlessdreamer.github.io/stacked-card-visualizer",
     "scripts": {
         "dev": "vite",
         "build": "tsc -b && vite build",
@@ -10,7 +11,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "predeploy": "npm run build",
-        "deploy": "gh-pages -d build"
+        "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.9.0",
